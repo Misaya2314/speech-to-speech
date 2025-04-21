@@ -1,5 +1,6 @@
 @echo off
 chcp 65001
+cd /d %~dp0
 echo 启动开发服务器...
 start cmd /k "npm run dev"
 echo 等待开发服务器启动...

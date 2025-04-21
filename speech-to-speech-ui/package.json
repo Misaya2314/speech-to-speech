@@ -57,8 +57,12 @@
     "win": {
       "target": [
         "nsis"
-      ],
-      "icon": "public/icon.ico"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
     }
   }
 }

@@ -121,14 +121,13 @@ import ToolBar from "@/components/ToolBar.vue";
 // 状态管理
 const isListening = ref(false);
 const status = ref(StatusType.IDLE);
-const messages = ref([]);
 const currentLanguage = ref("zh");
-const wsClient = ref(null);
+const wsClient = ref<WebSocketClient | null>(null);
 const lastCommand = ref("");
-const dataLogs = ref([]);
+const dataLogs = ref<string[]>([]);
 
 // 添加数据日志
-const addDataLog = (message) => {
+const addDataLog = (message: string) => {
   const timestamp = new Date().toLocaleTimeString();
   dataLogs.value.push(`[${timestamp}] ${message}`);
 
@@ -158,7 +157,7 @@ const startListening = () => {
 };
 
 // 处理语音命令
-const handleVoiceCommand = (text) => {
+const handleVoiceCommand = (text: string) => {
   lastCommand.value = text;
   addDataLog(`接收到命令: ${text}`);
 
@@ -180,7 +179,7 @@ onMounted(() => {
     wsClient.value.on(EventType.CONNECTED, () => {
       console.log("WebSocket已连接");
       status.value = StatusType.CONNECTED;
-      wsClient.value.setLanguage(currentLanguage.value);
+      wsClient.value?.setLanguage(currentLanguage.value);
       addDataLog("WebSocket连接已建立");
     });
 
@@ -191,7 +190,7 @@ onMounted(() => {
       addDataLog("WebSocket连接已断开");
     });
 
-    wsClient.value.on(EventType.TRANSCRIPTION, (data) => {
+    wsClient.value.on(EventType.TRANSCRIPTION, (data: { text: string }) => {
       handleVoiceCommand(data.text);
     });
 
@@ -201,7 +200,7 @@ onMounted(() => {
     addDataLog("系统初始化完成");
     addDataLog("加载汽车内饰模型...");
     addDataLog("模型加载完成");
-  } catch (error) {
+  } catch (error: any) {
     console.error("初始化WebSocket客户端失败:", error);
     addDataLog(`错误: ${error.message}`);
   }

@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import {
   Select,
   DArrowRight,
@@ -46,7 +45,7 @@ import {
   Microphone,
 } from "@element-plus/icons-vue";
 
-const props = defineProps({
+defineProps({
   isListening: {
     type: Boolean,
     default: false,
