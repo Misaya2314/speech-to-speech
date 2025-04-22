@@ -4,11 +4,11 @@
   "description": "语音对话应用桌面界面",
   "main": "electron/main.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3210",
     "build": "vue-tsc --noEmit && vite build",
     "electron:dev": "cross-env NODE_ENV=development electron .",
     "electron:build": "vue-tsc --noEmit && vite build && electron-builder",
-    "start": "concurrently npm:dev npm:electron:dev",
+    "start": "concurrently \"npm run dev\" \"npm run electron:dev\"",
     "preview": "vite preview",
     "reinstall": "rimraf node_modules && npm cache clean --force && npm install",
     "clean": "rimraf dist node_modules .vite"

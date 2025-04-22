@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const isDev = process.env.NODE_ENV === 'development';
+const fs = require('fs');
+const http = require('http');
 
 // 保持对窗口对象的全局引用，避免 JavaScript 垃圾回收时窗口被关闭
 let mainWindow;
@@ -9,6 +11,29 @@ let mainWindow;
 process.on('uncaughtException', (error) => {
   console.error('未捕获的异常:', error);
 });
+
+// 检查URL是否可用
+function checkUrlAvailable(url) {
+  return new Promise((resolve) => {
+    const request = http.get(url, (response) => {
+      if (response.statusCode === 200) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+      response.resume(); // 消费响应数据以释放内存
+    });
+    
+    request.on('error', () => {
+      resolve(false);
+    });
+    
+    request.setTimeout(1000, () => {
+      request.abort();
+      resolve(false);
+    });
+  });
+}
 
 function createWindow() {
   console.log('正在创建主窗口...');
@@ -29,29 +54,43 @@ function createWindow() {
   // 加载应用
   if (isDev) {
     // 开发环境下，加载 Vite 开发服务器
-    // 先尝试端口3001，因为vite通常在检测到3000被占用时会使用3001
-    const url = 'http://localhost:3001';
-    console.log('正在加载开发服务器URL:', url);
-    
-    mainWindow.loadURL(url).catch(err => {
-      console.error('加载开发服务器失败:', err);
-      // 尝试使用备用端口3000
-      const backupUrl = 'http://localhost:3000';
-      console.log('尝试备用URL:', backupUrl);
-      mainWindow.loadURL(backupUrl).catch(err2 => {
-        console.error('备用URL加载失败:', err2);
-      });
-    });
-    
-    // 打开开发者工具
-    mainWindow.webContents.openDevTools();
+    (async () => {
+      const viteUrl = 'http://localhost:3210/';
+      
+      // 检查Vite开发服务器是否已启动
+      const isViteRunning = await checkUrlAvailable(viteUrl);
+      
+      if (isViteRunning) {
+        console.log('正在加载开发服务器URL:', viteUrl);
+        try {
+          await mainWindow.loadURL(viteUrl);
+          console.log('成功加载开发服务器');
+        } catch (err) {
+          console.error('加载开发服务器失败:', err);
+        }
+      } else {
+        console.error('Vite开发服务器未运行，请先启动npm run dev');
+        // 显示错误页面
+        mainWindow.loadFile(path.join(__dirname, 'error.html')).catch(err => {
+          console.error('加载错误页面失败:', err);
+        });
+      }
+      
+      // 打开开发者工具
+      mainWindow.webContents.openDevTools();
+    })();
   } else {
     // 生产环境下，加载打包后的应用
     const filePath = path.join(__dirname, '../dist/index.html');
     console.log('正在加载本地文件:', filePath);
-    mainWindow.loadFile(filePath).catch(err => {
-      console.error('加载本地文件失败:', err);
-    });
+    
+    if (fs.existsSync(filePath)) {
+      mainWindow.loadFile(filePath).catch(err => {
+        console.error('加载本地文件失败:', err);
+      });
+    } else {
+      console.error('文件不存在:', filePath);
+    }
   }
 
   // 窗口关闭时触发

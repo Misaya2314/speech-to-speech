@@ -12,9 +12,11 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 3210,
     open: false,
     cors: true,
+    strictPort: true,
+    host: 'localhost',
   },
   build: {
     outDir: 'dist',
