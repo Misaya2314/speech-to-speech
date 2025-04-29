@@ -151,62 +151,109 @@
           </div>
         </div>
         
-        <!-- 底部控制台 -->
-        <div class="bottom-console">
-          <div class="console-section">
-            <h3>Graph</h3>
-            <div class="console-content">
-              <!-- 图表内容 -->
-              <div class="empty-placeholder" v-if="!graphData.length">
-                <span>无图表数据</span>
-              </div>
-              <div v-else class="graph-container">
-                <!-- 这里将来放置图表组件 -->
-                <div v-for="(graph, index) in graphData" :key="index" class="graph-item">
-                  {{ graph }}
-                </div>
+        <!-- 中间区域的底部输入区 -->
+        <div class="center-input-area">
+          <div class="mic-buttons">
+            <div
+              class="mic-button"
+              :class="{ active: isListening, 'is-rippling': isListening }"
+              @click="toggleListening"
+            >
+              <span v-if="isListening" class="mic-ripple"></span>
+              <el-icon v-if="isListening"><Microphone /></el-icon>
+              <el-icon v-else><MuteNotification /></el-icon>
+            </div>
+          </div>
+          
+          <div class="input-field">
+            <input 
+              type="text" 
+              placeholder="输入命令..." 
+              v-model="inputCommand" 
+              @keyup.enter="sendCommand"
+              :disabled="isProcessing || isListening"
+              ref="inputElement"
+            />
+            <span v-if="inputCommand.length > 0" class="clear-input" @click="clearInput">×</span>
+          </div>
+          
+          <div 
+            class="return-button" 
+            @click="sendCommand"
+            :class="{'disabled': !inputCommand.trim() || isProcessing || isListening}"
+          >
+            <el-icon><Back /></el-icon>
+          </div>
+        </div>
+
+        <!-- 状态提示条 -->
+        <div v-if="showStatusBar" class="status-bar" :class="status">
+          <div class="status-icon">
+            <el-icon v-if="status === 'connected'"><Check /></el-icon>
+            <el-icon v-else-if="status === 'connecting' || status === 'reconnecting'"><Loading /></el-icon>
+            <el-icon v-else-if="status === 'error'"><WarningFilled /></el-icon>
+            <el-icon v-else><InfoFilled /></el-icon>
+          </div>
+          <div class="status-text">{{ getStatusText() }}</div>
+          <div class="status-close" @click="showStatusBar = false">×</div>
+        </div>
+      </div>
+      
+      <!-- 右侧控制台 -->
+      <div class="right-console">
+        <div class="console-section">
+          <h3>Graph</h3>
+          <div class="console-content">
+            <!-- 图表内容 -->
+            <div class="empty-placeholder" v-if="!graphData.length">
+              <span>无图表数据</span>
+            </div>
+            <div v-else class="graph-container">
+              <!-- 这里将来放置图表组件 -->
+              <div v-for="(graph, index) in graphData" :key="index" class="graph-item">
+                {{ graph }}
               </div>
             </div>
           </div>
-          <div class="console-section">
-            <h3>Data</h3>
-            <div class="console-content data-logs">
-              <div
-                v-for="(log, index) in dataLogs"
-                :key="index"
-                class="log-item"
-              >
-                {{ log }}
-              </div>
-              <div v-if="!dataLogs.length" class="empty-placeholder">
-                <span>无数据记录</span>
-              </div>
+        </div>
+        <div class="console-section">
+          <h3>Data</h3>
+          <div class="console-content data-logs">
+            <div
+              v-for="(log, index) in dataLogs"
+              :key="index"
+              class="log-item"
+            >
+              {{ log }}
+            </div>
+            <div v-if="!dataLogs.length" class="empty-placeholder">
+              <span>无数据记录</span>
             </div>
           </div>
-          <div class="console-section">
-            <h3>System Monitor</h3>
-            <div class="console-content">
-              <!-- 系统监控内容 -->
-              <div class="system-resource">
-                <div class="resource-label">CPU:</div>
-                <div class="resource-value">{{ systemResources.cpu }}%</div>
-                <div class="resource-bar">
-                  <div class="resource-progress" :style="{ width: systemResources.cpu + '%' }"></div>
-                </div>
+        </div>
+        <div class="console-section">
+          <h3>System Monitor</h3>
+          <div class="console-content">
+            <!-- 系统监控内容 -->
+            <div class="system-resource">
+              <div class="resource-label">CPU:</div>
+              <div class="resource-value">{{ systemResources.cpu }}%</div>
+              <div class="resource-bar">
+                <div class="resource-progress" :style="{ width: systemResources.cpu + '%' }"></div>
               </div>
-              <div class="system-resource">
-                <div class="resource-label">内存:</div>
-                <div class="resource-value">{{ systemResources.memory }}%</div>
-                <div class="resource-bar">
-                  <div class="resource-progress" :style="{ width: systemResources.memory + '%' }"></div>
-                </div>
+            </div>
+            <div class="system-resource">
+              <div class="resource-label">内存:</div>
+              <div class="resource-value">{{ systemResources.memory }}%</div>
+              <div class="resource-bar">
+                <div class="resource-progress" :style="{ width: systemResources.memory + '%' }"></div>
               </div>
-              <div class="system-resource">
-                <div class="resource-label">模型:</div>
-                <div class="resource-value">{{ systemResources.model }}%</div>
-                <div class="resource-bar">
-                  <div class="resource-progress" :style="{ width: systemResources.model + '%' }"></div>
-                </div>
+            </div>
+            <div class="system-resource">
+              <div class="resource-label">模型:</div>
+              <div class="resource-value">{{ systemResources.model }}%</div>
+              <div class="resource-bar">
+                <div class="resource-progress" :style="{ width: systemResources.model + '%' }"></div>
               </div>
             </div>
           </div>
@@ -214,28 +261,6 @@
       </div>
     </div>
     
-    <!-- 底部输入区 -->
-    <div class="bottom-input-area">
-      <div class="mic-buttons">
-        <div
-          class="mic-button"
-          :class="{ active: isListening }"
-          @click="toggleListening"
-        >
-          <el-icon v-if="isListening"><Microphone /></el-icon>
-          <el-icon v-else><MuteNotification /></el-icon>
-        </div>
-      </div>
-      
-      <div class="input-field">
-        <input type="text" placeholder="输入命令..." v-model="inputCommand" @keyup.enter="sendCommand" />
-      </div>
-      
-      <div class="return-button" @click="sendCommand">
-        <el-icon><Back /></el-icon>
-      </div>
-    </div>
-
     <!-- 语音命令反馈 -->
     <div v-if="lastCommand" class="voice-feedback">
       <div class="feedback-content">
@@ -297,7 +322,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { 
   Setting, 
   QuestionFilled, 
@@ -310,7 +335,11 @@ import {
   Aim,
   Microphone,
   MuteNotification,
-  Back
+  Back,
+  Check,
+  Loading,
+  WarningFilled,
+  InfoFilled
 } from '@element-plus/icons-vue';
 import ChatWindow from '@/components/ChatWindow.vue';
 import SettingsPanel from '@/components/SettingsPanel.vue';
@@ -350,6 +379,9 @@ const showChatArea = ref(true);
 const inputCommand = ref('');
 const showKnowledgeManager = ref(false);
 const knowledgeDocuments = ref<KnowledgeDocument[]>([]);
+const showStatusBar = ref(true);
+const inputElement = ref<HTMLInputElement | null>(null);
+let resourceInterval: NodeJS.Timeout | null = null;
 
 // 系统资源监控
 const systemResources = ref({
@@ -388,21 +420,137 @@ const addDataLog = (message: string) => {
   }
 };
 
+/**
+ * 清除输入
+ */
+const clearInput = () => {
+  inputCommand.value = '';
+  // 聚焦输入框
+  nextTick(() => {
+    if (inputElement.value) {
+      inputElement.value.focus();
+    }
+  });
+};
+
+/**
+ * 获取状态文本
+ */
+const getStatusText = (): string => {
+  switch (status.value) {
+    case 'connected':
+      return '已连接到服务器';
+    case 'disconnected':
+      return '与服务器的连接已断开';
+    case 'connecting':
+      return '正在连接到服务器...';
+    case 'reconnecting':
+      const reconnectInfo = wsClient?.getReconnectInfo() || { attempts: 0, max: 0 };
+      return `正在重新连接 (${reconnectInfo.attempts}/${reconnectInfo.max})...`;
+    case 'listening':
+      return '正在聆听...';
+    case 'processing':
+      return '正在处理...';
+    case 'error':
+      return '发生错误，请检查网络连接或重启应用';
+    default:
+      return '正在初始化...';
+  }
+};
+
+/**
+ * 开始语音识别
+ */
+const toggleListening = async () => {
+  if (!wsClient) {
+    addDataLog('错误: WebSocket客户端未初始化');
+    return;
+  }
+  
+  if (isListening.value) {
+    // 停止监听
+    wsClient.stopListening();
+    isListening.value = false;
+    addDataLog('停止语音监听');
+    
+    // 更新状态为处理中
+    isProcessing.value = true;
+    addDataLog('处理中...');
+  } else {
+    try {
+      // 初始化音频配置
+      const audioConfig = {
+        sampleRate: 16000,
+        channels: 1,
+        format: 'audio/webm'
+      };
+      
+      // 开始监听
+      await wsClient.startListening({
+        language: settings.value.language,
+        useLocalKnowledge: settings.value.useLocalKnowledge,
+        audioConfig: audioConfig,
+        stt_model: settings.value.stt,
+        llm_model: settings.value.llm,
+        tts_model: settings.value.tts,
+        voice: settings.value.voice
+      });
+      
+      isListening.value = true;
+      addDataLog('开始语音监听');
+      
+      // 添加新的用户消息占位符
+      if (!settings.value.showRealtimeText) {
+        messages.value.push({
+          type: 'user',
+          text: '...',
+          timestamp: Date.now()
+        });
+      }
+    } catch (error: any) {
+      console.error('启动语音识别失败:', error);
+      addDataLog(`错误: 启动语音识别失败 - ${error.message || '未知错误'}`);
+    }
+  }
+};
+
 // 初始化WebSocket客户端
 const initWebSocketClient = () => {
   wsClient = new WebSocketClient({
-    url: 'ws://localhost:8765'
+    url: 'ws://localhost:8765',
+    reconnectInterval: 5000,
+    maxReconnectAttempts: 10,
+    pingInterval: 30000,
+    autoReconnect: true
   });
   
   // 注册事件监听器
   wsClient.on(EventType.CONNECTED, () => {
     status.value = 'connected';
     addDataLog('WebSocket连接已建立');
+    
+    // 设置初始配置
+    if (wsClient) {
+      wsClient.setLanguage(settings.value.language);
+      wsClient.setModel('stt', settings.value.stt);
+      wsClient.setModel('llm', settings.value.llm);
+      wsClient.setModel('tts', settings.value.tts);
+    }
   });
   
-  wsClient.on(EventType.DISCONNECTED, () => {
+  wsClient.on(EventType.DISCONNECTED, (data: any) => {
     status.value = 'disconnected';
-    addDataLog('WebSocket连接已断开');
+    addDataLog(`WebSocket连接已断开: ${data?.reason || ''}`);
+  });
+  
+  wsClient.on(EventType.RECONNECTING, (data: any) => {
+    status.value = 'reconnecting';
+    addDataLog(`尝试重新连接 (${data.attempt}/${data.max})...`);
+  });
+  
+  wsClient.on(EventType.RECONNECT_FAILED, () => {
+    status.value = 'error';
+    addDataLog('重连失败，请检查网络连接或重启应用');
   });
   
   wsClient.on(EventType.TRANSCRIPTION, (data) => {
@@ -432,10 +580,20 @@ const initWebSocketClient = () => {
     isProcessing.value = false;
     addDataLog('接收到AI响应');
     
+    // 如果响应中包含知识库引用信息，则添加到Data日志中
+    if (data.sources && data.sources.length > 0) {
+      addDataLog(`知识库引用: ${data.sources.map((s: any) => s.title || s.file).join(', ')}`);
+    }
+    
     // 模拟图表数据生成
     if (Math.random() > 0.7) {
       graphData.value.push('生成的图表 ' + new Date().toLocaleTimeString());
     }
+  });
+  
+  wsClient.on(EventType.AUDIO_CHUNK, (_data: any) => {
+    // 音频块已由WebSocketClient自动处理并播放
+    addDataLog('接收到音频响应');
   });
   
   wsClient.on(EventType.STATUS_UPDATE, (data) => {
@@ -444,54 +602,56 @@ const initWebSocketClient = () => {
     if (data.status === 'processing') {
       isProcessing.value = true;
       addDataLog('处理中...');
+    } else if (data.status === 'listening') {
+      addDataLog('正在聆听...');
+    }
+    
+    // 更新系统资源信息
+    if (data.resources) {
+      if (data.resources.cpu) {
+        systemResources.value.cpu = data.resources.cpu;
+      }
+      if (data.resources.memory) {
+        systemResources.value.memory = data.resources.memory;
+      }
+      if (data.resources.model) {
+        systemResources.value.model = data.resources.model;
+      }
     }
   });
   
-  wsClient.on(EventType.ERROR, (error) => {
+  wsClient.on(EventType.ERROR, (error: any) => {
     console.error('WebSocket错误:', error);
     status.value = 'error';
-    addDataLog('错误: ' + (error.message || '未知错误'));
+    addDataLog('错误: ' + (error.message || error.error || '未知错误'));
+    
+    // 如果在监听状态发生错误，则停止监听
+    if (isListening.value) {
+      isListening.value = false;
+    }
+    
+    // 如果在处理状态发生错误，则重置处理状态
+    if (isProcessing.value) {
+      isProcessing.value = false;
+    }
   });
   
   // 连接到服务器
   wsClient.connect();
 };
 
-// 切换监听状态
-const toggleListening = () => {
-  if (!wsClient) return;
-  
-  if (isListening.value) {
-    // 停止监听
-    wsClient.stopListening();
-    isListening.value = false;
-    
-    // 提交完整的用户输入，开始处理
-    isProcessing.value = true;
-    addDataLog('停止语音监听');
-  } else {
-    // 开始监听
-    wsClient.startListening({
-      language: settings.value.language,
-      useLocalKnowledge: settings.value.useLocalKnowledge // 传递是否使用本地知识库
-    });
-    isListening.value = true;
-    addDataLog('开始语音监听');
-    
-    // 添加新的用户消息占位符
-    if (!settings.value.showRealtimeText) {
-      messages.value.push({
-        type: 'user',
-        text: '...',
-        timestamp: Date.now()
-      });
-    }
-  }
-};
-
 // 发送文本命令
 const sendCommand = () => {
   if (!inputCommand.value.trim()) return;
+  if (!wsClient) {
+    addDataLog('错误: WebSocket客户端未初始化');
+    return;
+  }
+  
+  // 如果正在处理或录音中，忽略命令
+  if (isProcessing.value || isListening.value) {
+    return;
+  }
   
   // 添加用户消息
   messages.value.push({
@@ -503,20 +663,21 @@ const sendCommand = () => {
   lastCommand.value = inputCommand.value;
   addDataLog(`发送命令: ${inputCommand.value}`);
   
+  // 更新状态为处理中
+  isProcessing.value = true;
+  
+  // 发送命令到服务器
+  wsClient.send(MessageType.RESPONSE, {
+    text: inputCommand.value,
+    useLocalKnowledge: settings.value.useLocalKnowledge,
+    llm_model: settings.value.llm,
+    tts_model: settings.value.tts,
+    voice: settings.value.voice,
+    language: settings.value.language
+  });
+  
   // 清空输入
   inputCommand.value = '';
-  
-  // 模拟处理
-  isProcessing.value = true;
-  setTimeout(() => {
-    messages.value.push({
-      type: 'ai',
-      text: '收到您的命令，正在处理...',
-      timestamp: Date.now()
-    });
-    isProcessing.value = false;
-    addDataLog('接收到AI响应');
-  }, 1000);
 };
 
 // 更新设置
@@ -622,6 +783,9 @@ const handleIndexBuild = () => {
 
 // 组件挂载
 onMounted(() => {
+  // 监听页面可见性变化，优化性能
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  
   // 加载设置
   loadSettings();
   
@@ -634,11 +798,14 @@ onMounted(() => {
   addDataLog('模型加载完成');
   
   // 启动模拟系统资源更新
-  const resourceInterval = setInterval(updateSystemResources, 5000);
+  resourceInterval = setInterval(updateSystemResources, 5000);
   
   // 清理定时器
   onUnmounted(() => {
-    clearInterval(resourceInterval);
+    if (resourceInterval) {
+      clearInterval(resourceInterval);
+      resourceInterval = null;
+    }
     
     // 断开WebSocket连接
     if (wsClient) {
@@ -646,7 +813,72 @@ onMounted(() => {
       wsClient = null;
     }
   });
+  
+  // 聚焦输入框
+  nextTick(() => {
+    if (inputElement.value) {
+      inputElement.value.focus();
+    }
+  });
+  
+  // 监听网络状态
+  window.addEventListener('online', handleOnline);
+  window.addEventListener('offline', handleOffline);
+  
+  // 卸载时移除监听器
+  onUnmounted(() => {
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+    window.removeEventListener('online', handleOnline);
+    window.removeEventListener('offline', handleOffline);
+  });
 });
+
+/**
+ * 处理页面可见性变化
+ */
+const handleVisibilityChange = () => {
+  if (document.hidden) {
+    // 页面不可见时暂停一些操作以节省资源
+    if (resourceInterval) {
+      clearInterval(resourceInterval);
+      resourceInterval = null;
+    }
+  } else {
+    // 页面可见时恢复操作
+    if (!resourceInterval) {
+      resourceInterval = setInterval(updateSystemResources, 5000);
+    }
+    
+    // 如果连接已断开，尝试重新连接
+    if (status.value === 'disconnected' && wsClient) {
+      wsClient.connect();
+    }
+  }
+};
+
+/**
+ * 处理网络连接恢复
+ */
+const handleOnline = () => {
+  addDataLog('网络连接已恢复');
+  if (status.value === 'disconnected' || status.value === 'error') {
+    if (wsClient) {
+      wsClient.connect();
+    }
+  }
+};
+
+/**
+ * 处理网络连接断开
+ */
+const handleOffline = () => {
+  addDataLog('网络连接已断开');
+  if (status.value === 'connected' || status.value === 'listening') {
+    if (wsClient) {
+      // 由WebSocket客户端自行处理断开事件
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -801,7 +1033,6 @@ onMounted(() => {
   flex: 1;
   background-color: #f9f9f9;
   border-radius: 8px;
-  margin-bottom: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -831,28 +1062,45 @@ onMounted(() => {
   overflow: hidden;
 }
 
-.bottom-console {
-  height: 200px;
-  display: flex;
-  gap: 10px;
-}
-
-.console-section {
-  flex: 1;
-  background-color: white;
-  border-radius: 5px;
-  border: 1px solid #eee;
+/* 右侧控制台样式 */
+.right-console {
+  width: 300px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background-color: #f3f3f3;
+}
+
+.console-section {
+  margin: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.console-section:first-child {
+  flex: 2;
+  margin-bottom: 0;
+}
+
+.console-section:nth-child(2) {
+  flex: 2;
+  margin-bottom: 0;
+}
+
+.console-section:last-child {
+  flex: 1;
 }
 
 .console-section h3 {
-  margin: 0;
-  padding: 8px 15px;
   font-size: 16px;
   font-weight: normal;
   color: #333;
+  margin: 0;
+  padding: 10px;
   background-color: #f5f5f5;
   border-bottom: 1px solid #eee;
 }
@@ -910,14 +1158,16 @@ onMounted(() => {
   border-radius: 4px;
 }
 
-/* 底部输入区 */
-.bottom-input-area {
-  height: 60px;
+/* 中间区域的底部输入区 */
+.center-input-area {
+  height: 70px;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 10px 15px;
   background-color: white;
-  border-top: 1px solid #ddd;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mic-buttons {
@@ -925,8 +1175,8 @@ onMounted(() => {
 }
 
 .mic-button {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   background-color: white;
   border-radius: 50%;
   display: flex;
@@ -934,6 +1184,11 @@ onMounted(() => {
   align-items: center;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.mic-button:hover {
+  transform: scale(1.05);
 }
 
 .mic-button.active {
@@ -943,22 +1198,57 @@ onMounted(() => {
 
 .input-field {
   flex: 1;
+  position: relative;
 }
 
 .input-field input {
   width: 100%;
-  height: 36px;
-  padding: 0 15px;
+  height: 45px;
+  padding: 0 20px;
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 22px;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field input:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.input-field input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.clear-input {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #999;
+  font-size: 18px;
+  border-radius: 50%;
+}
+
+.clear-input:hover {
+  background-color: #f0f0f0;
+  color: #666;
 }
 
 .return-button {
-  width: 40px;
-  height: 40px;
-  background-color: white;
+  width: 45px;
+  height: 45px;
+  background-color: #1976d2;
+  color: white;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -966,6 +1256,22 @@ onMounted(() => {
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-left: 15px;
+  transition: all 0.2s ease;
+}
+
+.return-button:hover {
+  background-color: #1565c0;
+  transform: scale(1.05);
+}
+
+.return-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.return-button.disabled:hover {
+  background-color: #ccc;
+  transform: none;
 }
 
 /* 语音反馈 */
@@ -1010,5 +1316,60 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+/* 状态提示条 */
+.status-bar {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.status-bar.connected {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-bar.disconnected, .status-bar.error {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-bar.connecting, .status-bar.reconnecting {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.status-bar.listening, .status-bar.processing {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-icon {
+  margin-right: 10px;
+}
+
+.status-text {
+  flex: 1;
+}
+
+.status-close {
+  cursor: pointer;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.status-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>

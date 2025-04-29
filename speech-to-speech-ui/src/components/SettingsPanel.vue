@@ -145,7 +145,7 @@
           :min="0"
           :max="1"
           :step="0.01"
-          :format-tooltip="value => (value * 100).toFixed(0) + '%'"
+          :format-tooltip="(value: number) => (value * 100).toFixed(0) + '%'"
           @change="updateSettings('relevanceThreshold', relevanceThreshold)"
         />
       </div>

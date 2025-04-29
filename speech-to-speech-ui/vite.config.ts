@@ -23,4 +23,14 @@ export default defineConfig({
     assetsDir: 'assets',
     emptyOutDir: true,
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./tests/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      exclude: ['node_modules/']
+    }
+  }
 }); 
