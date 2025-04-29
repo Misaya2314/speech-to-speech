@@ -1,6 +1,5 @@
 websockets>=10.3
 asyncio>=3.4.3
-# 下面是核心S2S系统已有的依赖，可能已经安装
 # torch>=1.13.0
 # transformers>=4.26.0
 # sounddevice>=0.4.5 

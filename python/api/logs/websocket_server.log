@@ -1,0 +1,80 @@
+2025-04-29 17:53:42,286 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 17:53:42,311 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-04-29 17:53:42,312 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-04-29 17:54:09,618 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 17:54:09,629 - S2SWebSocketServer - WARNING - 端口 8766 被占用，尝试使用端口 8767
+2025-04-29 17:54:09,629 - websockets.server - INFO - server listening on 127.0.0.1:8767
+2025-04-29 17:54:09,629 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8767
+2025-04-29 18:04:05,307 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 18:04:05,326 - websockets.server - INFO - server listening on 0.0.0.0:8766
+2025-04-29 18:04:05,340 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 0.0.0.0:8766
+2025-04-29 18:04:18,644 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 18:04:18,650 - S2SWebSocketServer - WARNING - 端口 8766 被占用，尝试使用端口 8767
+2025-04-29 18:04:18,650 - websockets.server - INFO - server listening on 0.0.0.0:8767
+2025-04-29 18:04:18,650 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 0.0.0.0:8767
+2025-04-29 18:06:26,904 - websockets.server - INFO - connection open
+2025-04-29 18:06:26,904 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 55026)，当前连接数: 1
+2025-04-29 18:06:26,937 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 18:06:26,937 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 18:06:26,938 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 18:06:26,938 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 18:06:26,939 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 18:06:26,939 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 18:06:26,939 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 18:06:26,940 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 18:06:38,828 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 18:06:38,828 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 18:06:38,828 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 18:07:00,365 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 18:07:00,365 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 18:07:00,371 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,372 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,372 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,374 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,374 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,374 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,374 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,377 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,378 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,379 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,385 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,386 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,386 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,386 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,386 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 18:07:00,386 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 18:07:00,386 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 18:07:00,386 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 18:07:00,386 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 18:07:04,158 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 18:07:04,158 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 55026)，当前连接数: 0
+2025-04-29 18:07:12,287 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 18:07:12,303 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-04-29 18:07:12,303 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-04-29 18:07:23,181 - websockets.server - INFO - connection open
+2025-04-29 18:07:23,182 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 55163)，当前连接数: 1
+2025-04-29 18:07:23,230 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 18:07:23,230 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 18:07:23,230 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 18:07:23,230 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 18:07:23,236 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 18:07:23,236 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 18:07:23,236 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 18:07:23,236 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 18:07:28,868 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 18:07:28,870 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 55163)，当前连接数: 0

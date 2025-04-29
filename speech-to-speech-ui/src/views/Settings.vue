@@ -223,7 +223,7 @@ export default defineComponent({
       outputVolume: 80,
       silenceThreshold: 30,
       serverAddress: "localhost",
-      serverPort: 8765,
+      serverPort: 8766,
     });
 
     // STT模型列表
@@ -308,7 +308,7 @@ export default defineComponent({
         outputVolume: 80,
         silenceThreshold: 30,
         serverAddress: "localhost",
-        serverPort: 8765,
+        serverPort: 8766,
       });
 
       ElMessage.info("设置已重置");

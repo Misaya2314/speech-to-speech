@@ -517,7 +517,7 @@ const toggleListening = async () => {
 // 初始化WebSocket客户端
 const initWebSocketClient = () => {
   wsClient = new WebSocketClient({
-    url: 'ws://localhost:8765',
+    url: 'ws://127.0.0.1:8766',
     reconnectInterval: 5000,
     maxReconnectAttempts: 10,
     pingInterval: 30000,
