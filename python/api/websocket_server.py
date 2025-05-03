@@ -51,7 +51,7 @@ class S2SWebSocketServer:
     作为独立的服务运行，使得前端UI和后端处理系统可以完全分离。
     """
     
-    def __init__(self, host: str = "127.0.0.1", port: int = 8766):
+    def __init__(self, host: str = "127.0.0.1", port: int = 8766, model_path: Optional[str] = None):
         self.host = host
         self.port = port
         self.clients = set()
@@ -60,14 +60,22 @@ class S2SWebSocketServer:
         self.text_input_queue = Queue()    # 存储从前端接收的文本数据
         self.text_output_queue = Queue()   # 存储要发送到前端的文本数据
         self.stop_event = threading.Event()
+        self.model_path = model_path
         
         # 初始化管道配置
         self.pipeline_config = {
             "language": "en",
-            "stt_model": "whisper-large-v3",
+            "stt_model": "openai/whisper-large-v3",
             "lm_model": "meta-llama/Llama-2-7b-chat-hf",
             "tts_model": "tts_models/multilingual/multi-dataset/xtts_v2"
         }
+        
+        # 如果提供了本地模型路径，使用本地模型
+        if self.model_path:
+            logger.info(f"使用本地模型路径: {self.model_path}")
+            # 设置环境变量指示使用本地模型
+            os.environ["USE_LOCAL_MODELS"] = "1"
+            os.environ["LOCAL_MODEL_PATH"] = self.model_path
         
         # 创建S2S管道桥接
         self.pipeline_bridge = S2SPipelineBridge()
@@ -112,128 +120,158 @@ class S2SWebSocketServer:
                     
                     logger.debug(f"收到消息: {message_type}")
                     
-                    # 根据消息类型处理请求
-                    if message_type == "start_listening":
-                        logger.info("接收到开始监听请求")
-                        await self.start_pipeline(websocket, message_data)
-                    
-                    elif message_type == "stop_listening":
-                        logger.info("接收到停止监听请求")
-                        await self.stop_pipeline(websocket)
-                    
-                    elif message_type == "ping":
-                        # 处理心跳检测
-                        await websocket.send(json.dumps({
-                            "type": "pong",
-                            "data": { "timestamp": int(time.time() * 1000) }
-                        }))
+                    # 处理不同类型的消息
+                    if message_type == "ping":
+                        # 心跳检测
+                        await websocket.send(json.dumps({"type": "pong"}))
                     
                     elif message_type == "set_language":
+                        # 设置语言
                         language = message_data.get("language", "en")
                         logger.info(f"设置语言: {language}")
                         self.pipeline_config["language"] = language
+                        self.pipeline_bridge.update_config({"language": language})
                         await self.send_status(websocket, "language_set", {"language": language})
                     
                     elif message_type == "set_model":
-                        model_type = message_data.get("model_type", "")
-                        model_name = message_data.get("model_name", "")
+                        # 设置模型
+                        model_type = message_data.get("model_type")
+                        model_name = message_data.get("model_name")
                         
                         if model_type and model_name:
                             logger.info(f"设置模型 {model_type}: {model_name}")
+                            
                             if model_type == "stt":
                                 self.pipeline_config["stt_model"] = model_name
-                            elif model_type == "lm":
+                                self.pipeline_bridge.update_config({"stt_model": model_name})
+                            elif model_type == "llm":
                                 self.pipeline_config["lm_model"] = model_name
+                                self.pipeline_bridge.update_config({"lm_model": model_name})
                             elif model_type == "tts":
                                 self.pipeline_config["tts_model"] = model_name
+                                self.pipeline_bridge.update_config({"tts_model": model_name})
                             
                             await self.send_status(websocket, "model_set", {
                                 "model_type": model_type,
                                 "model_name": model_name
                             })
                     
+                    elif message_type == "start_listening":
+                        # 开始监听音频
+                        logger.info("收到开始监听请求")
+                        
+                        # 如果管道未运行，启动管道
+                        if not self.pipeline_bridge.is_running():
+                            if self.pipeline_bridge.start_pipeline():
+                                await self.send_status(websocket, "pipeline_started")
+                                
+                                # 启动结果监听线程
+                                if not self.result_listener_running:
+                                    self.start_result_listener([websocket])
+                            else:
+                                await self.send_status(websocket, "error", {
+                                    "message": "启动管道失败"
+                                })
+                                continue
+                        
+                        # 启用语音监听
+                        self.pipeline_bridge.set_listening(True)
+                        await self.send_status(websocket, "listening_started")
+                    
+                    elif message_type == "stop_listening":
+                        # 停止监听音频
+                        logger.info("收到停止监听请求")
+                        
+                        if self.pipeline_bridge.is_running():
+                            # 禁用语音监听
+                            self.pipeline_bridge.set_listening(False)
+                            await self.send_status(websocket, "listening_stopped")
+                        else:
+                            await self.send_status(websocket, "warning", {
+                                "message": "管道未运行"
+                            })
+                    
                     elif message_type == "audio_data":
-                        # 处理前端发送的音频数据
-                        audio_data = message_data.get("audio")
-                        if audio_data and self.pipeline_bridge.is_running():
-                            # 将Base64编码的音频数据解码为字节
-                            try:
-                                audio_bytes = base64.b64decode(audio_data)
-                                self.pipeline_bridge.send_audio(audio_bytes)
-                            except Exception as e:
-                                logger.error(f"处理音频数据失败: {str(e)}")
+                        # 处理音频数据
+                        if self.pipeline_bridge.is_running():
+                            audio_base64 = message_data.get("audio")
+                            if audio_base64:
+                                try:
+                                    audio_data = base64.b64decode(audio_base64)
+                                    self.pipeline_bridge.send_audio(audio_data)
+                                except Exception as e:
+                                    logger.error(f"处理音频数据失败: {str(e)}")
+                                    await self.send_status(websocket, "error", {
+                                        "message": f"音频处理错误: {str(e)}"
+                                    })
+                        else:
+                            logger.warning("管道未运行，无法处理音频数据")
+                    
+                    elif message_type == "text_input":
+                        # 处理文本输入（绕过STT直接发送到LLM）
+                        if self.pipeline_bridge.is_running():
+                            text = message_data.get("text", "")
+                            language = message_data.get("language", self.pipeline_config["language"])
+                            if text:
+                                self.pipeline_bridge.send_text(text, language)
+                                await self.send_status(websocket, "text_sent")
+                        else:
+                            if self.pipeline_bridge.start_pipeline():
+                                await self.send_status(websocket, "pipeline_started")
+                                
+                                # 启动结果监听线程
+                                if not self.result_listener_running:
+                                    self.start_result_listener([websocket])
+                                
+                                # 发送文本
+                                text = message_data.get("text", "")
+                                language = message_data.get("language", self.pipeline_config["language"])
+                                if text:
+                                    self.pipeline_bridge.send_text(text, language)
+                                    await self.send_status(websocket, "text_sent")
+                            else:
+                                await self.send_status(websocket, "error", {
+                                    "message": "启动管道失败"
+                                })
                     
                     elif message_type == "response":
-                        # 处理前端发送的文本命令
-                        text = message_data.get("text", "")
-                        language = message_data.get("language", "en")
-                        
-                        if text and self.pipeline_bridge.is_running():
-                            logger.info(f"接收到文本命令: {text}")
-                            self.pipeline_bridge.send_text(text, language)
+                        # 接收客户端处理后的响应数据（目前未使用）
+                        pass
                     
                     else:
+                        # 未知消息类型
                         logger.warning(f"未知消息类型: {message_type}")
-                        await self.send_status(websocket, "error", {
+                        await self.send_status(websocket, "warning", {
                             "message": f"未知消息类型: {message_type}"
                         })
-                
+                    
                 except json.JSONDecodeError:
-                    logger.error("JSON解析错误")
+                    logger.error("无效的JSON格式")
                     await self.send_status(websocket, "error", {
                         "message": "无效的JSON格式"
                     })
-                
                 except Exception as e:
                     logger.error(f"处理消息时出错: {str(e)}")
                     await self.send_status(websocket, "error", {
-                        "message": f"处理请求时出错: {str(e)}"
+                        "message": f"处理错误: {str(e)}"
                     })
         
-        except websockets.exceptions.ConnectionClosed:
-            logger.info("客户端连接关闭")
-        
         finally:
-            # 如果当前客户端是最后一个客户端，则停止管道
-            if len(self.clients) <= 1:
-                self.stop_result_listener()
-                self.pipeline_bridge.stop_pipeline()
-            
+            # 客户端断开连接时关闭管道
+            if len(self.clients) <= 1:  # 当前客户端是最后一个
+                self.stop_pipeline()
             await self.unregister(websocket)
     
-    async def start_pipeline(self, websocket, config: Dict[str, Any]):
-        """启动S2S语音处理管道"""
-        # 更新配置
-        if "language" in config:
-            self.pipeline_config["language"] = config["language"]
-        
-        # 更新S2S管道配置
-        self.pipeline_bridge.update_config(self.pipeline_config)
-        
-        # 启动S2S管道
-        if self.pipeline_bridge.start_pipeline():
-            # 开始监听结果
-            self.start_result_listener(websocket)
-            
-            await self.send_status(websocket, "pipeline_started", {
-                "config": self.pipeline_config
-            })
-        else:
-            await self.send_status(websocket, "error", {
-                "message": "启动S2S管道失败"
-            })
-    
-    async def stop_pipeline(self, websocket):
-        """停止S2S语音处理管道"""
-        # 停止结果监听器
+    def stop_pipeline(self):
+        """停止S2S管道和结果监听线程"""
+        # 停止结果监听线程
         self.stop_result_listener()
         
-        # 停止S2S管道
-        self.pipeline_bridge.stop_pipeline()
-        
-        await self.send_status(websocket, "pipeline_stopped")
+        # 停止管道
+        if self.pipeline_bridge.is_running():
+            self.pipeline_bridge.stop_pipeline()
     
-    def start_result_listener(self, websocket):
+    def start_result_listener(self, websockets_list):
         """启动结果监听线程"""
         if self.result_listener_running:
             return
@@ -241,164 +279,99 @@ class S2SWebSocketServer:
         self.result_listener_running = True
         self.result_listener_thread = threading.Thread(
             target=self._result_listener_task,
-            args=(websocket,),
+            args=(websockets_list,),
             daemon=True
         )
         self.result_listener_thread.start()
-        logger.info("结果监听线程已启动")
     
     def stop_result_listener(self):
         """停止结果监听线程"""
         self.result_listener_running = False
         if self.result_listener_thread:
-            self.result_listener_thread.join(timeout=1.0)
+            self.result_listener_thread.join(timeout=2.0)
             self.result_listener_thread = None
-            logger.info("结果监听线程已停止")
     
-    def _result_listener_task(self, websocket):
+    def _result_listener_task(self, websockets_list):
         """结果监听线程的任务函数"""
+        logger.info("结果监听线程已启动")
+        
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
-        try:
-            while self.result_listener_running:
-                # 检查是否有文本输出
-                text_output = self.pipeline_bridge.get_text_output(timeout=0.1, is_transcription=False)
-                if text_output:
-                    asyncio.run_coroutine_threadsafe(
-                        self._send_response(websocket, text_output),
-                        loop
-                    )
-                
-                # 检查是否有转录输出
-                transcription = self.pipeline_bridge.get_text_output(timeout=0.1, is_transcription=True)
-                if transcription:
-                    asyncio.run_coroutine_threadsafe(
-                        self._send_transcription(websocket, transcription),
-                        loop
-                    )
-                
-                # 检查是否有音频输出
-                audio_output = self.pipeline_bridge.get_audio_output(timeout=0.1)
-                if audio_output:
-                    asyncio.run_coroutine_threadsafe(
-                        self._send_audio_chunk(websocket, audio_output),
-                        loop
-                    )
-                
-                # 短暂休眠，避免CPU占用过高
-                time.sleep(0.01)
-        
-        except Exception as e:
-            logger.error(f"结果监听线程出错: {str(e)}")
-        finally:
-            loop.close()
-    
-    async def _send_response(self, websocket, response):
-        """发送LLM响应到客户端"""
-        try:
-            if not websocket.closed:
-                await websocket.send(json.dumps({
-                    "type": "response",
-                    "data": {
-                        "text": response.get("text", ""),
-                        "language": response.get("language", "en")
-                    }
-                }))
-        except Exception as e:
-            logger.error(f"发送响应失败: {str(e)}")
-    
-    async def _send_transcription(self, websocket, transcription):
-        """发送语音转录结果到客户端"""
-        try:
-            if not websocket.closed:
-                await websocket.send(json.dumps({
-                    "type": "transcription",
-                    "data": {
-                        "text": transcription.get("text", ""),
-                        "language": transcription.get("language", "en")
-                    }
-                }))
-        except Exception as e:
-            logger.error(f"发送转录结果失败: {str(e)}")
-    
-    async def _send_audio_chunk(self, websocket, audio_chunk):
-        """发送音频块到客户端"""
-        try:
-            if not websocket.closed:
-                # 将音频数据编码为Base64字符串
-                audio_base64 = base64.b64encode(audio_chunk).decode('utf-8')
-                
-                await websocket.send(json.dumps({
-                    "type": "audio_chunk",
-                    "data": {
-                        "audio": audio_base64,
-                        "is_last": False  # 这里可能需要根据实际情况设置
-                    }
-                }))
-        except Exception as e:
-            logger.error(f"发送音频块失败: {str(e)}")
-    
-    @websocket_exception_handler
-    async def send_results(self, websocket):
-        """将处理结果发送到客户端"""
-        pass  # 这个方法已被_result_listener_task替代
-    
-    async def start_server(self):
-        """启动WebSocket服务器"""
-        port = self.port
-        max_attempts = 5
-        attempt = 0
-        
-        while attempt < max_attempts:
+        while self.result_listener_running:
             try:
-                server = await websockets.serve(
-                    self.handle_client, self.host, port
-                )
-                logger.info(f"WebSocket服务器已启动 - 监听 {self.host}:{port}")
-                self.port = port  # 更新实际使用的端口
-                return server
-            except OSError as e:
-                attempt += 1
-                logger.warning(f"端口 {port} 被占用，尝试使用端口 {port + 1}")
-                port += 1
+                # 检查转录结果
+                transcript = self.pipeline_bridge.get_text_output(timeout=0.1, is_transcription=True)
+                if transcript:
+                    language_code = "auto"
+                    if isinstance(transcript, tuple) and len(transcript) > 1:
+                        text, language_code = transcript
+                    else:
+                        text = transcript
+                    
+                    # 发送转录结果到所有客户端
+                    message = {
+                        "type": "transcription",
+                        "data": {
+                            "text": text,
+                            "language": language_code
+                        }
+                    }
+                    self._send_to_all_clients(message, websockets_list, loop)
                 
-                if attempt >= max_attempts:
-                    logger.error(f"尝试了 {max_attempts} 个端口后仍无法启动服务器")
-                    raise e
+                # 检查LLM响应
+                response = self.pipeline_bridge.get_text_output(timeout=0.1)
+                if response:
+                    # 发送LLM响应到所有客户端
+                    message = {
+                        "type": "llm_response",
+                        "data": {
+                            "text": response
+                        }
+                    }
+                    self._send_to_all_clients(message, websockets_list, loop)
+                
+                # 短暂休眠以减少CPU使用率
+                time.sleep(0.01)
+                
+            except Exception as e:
+                logger.error(f"结果监听线程出错: {str(e)}")
+                time.sleep(1.0)  # 错误后暂停一段时间
+        
+        logger.info("结果监听线程已停止")
     
-    def run(self):
-        """运行WebSocket服务器（阻塞）"""
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-        server = loop.run_until_complete(self.start_server())
-        
-        try:
-            loop.run_forever()
-        except KeyboardInterrupt:
-            logger.info("接收到中断信号，正在关闭服务器...")
-        finally:
-            server.close()
-            loop.run_until_complete(server.wait_closed())
-            loop.close()
-            logger.info("服务器已关闭")
+    def _send_to_all_clients(self, message, websockets_list, loop):
+        """向所有WebSocket客户端发送消息"""
+        for websocket in websockets_list:
+            if websocket.open:
+                asyncio.run_coroutine_threadsafe(
+                    websocket.send(json.dumps(message)),
+                    loop
+                )
 
-def parse_args():
-    """解析命令行参数"""
-    parser = argparse.ArgumentParser(description="S2S WebSocket Server")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="服务器主机地址")
-    parser.add_argument("--port", type=int, default=8766, help="服务器端口号")
-    parser.add_argument("--debug", action="store_true", help="启用调试模式")
-    return parser.parse_args()
+async def main(host: str, port: int, model_path: Optional[str] = None):
+    """主函数，启动WebSocket服务器"""
+    logger.debug("调试模式已启用")
+    
+    # 创建WebSocket服务器实例
+    server = S2SWebSocketServer(host=host, port=port, model_path=model_path)
+    
+    # 启动WebSocket服务器
+    async with websockets.serve(server.handle_client, host, port):
+        logger.info(f"WebSocket服务器已启动 - 监听 {host}:{port}")
+        await asyncio.Future()  # 运行直到被取消
 
 if __name__ == "__main__":
-    args = parse_args()
+    # 解析命令行参数
+    parser = argparse.ArgumentParser(description="S2S WebSocket服务器")
+    parser.add_argument("--host", type=str, default="127.0.0.1", help="WebSocket服务器主机地址")
+    parser.add_argument("--port", type=int, default=8766, help="WebSocket服务器端口")
+    parser.add_argument("--model_path", type=str, default=None, help="本地模型路径")
     
-    # 如果开启调试模式，设置日志级别为DEBUG
-    if args.debug:
-        logger.setLevel(logging.DEBUG)
-        logger.debug("调试模式已启用")
+    args = parser.parse_args()
     
-    server = S2SWebSocketServer(host=args.host, port=args.port)
-    server.run() 
+    # 启动WebSocket服务器
+    try:
+        asyncio.run(main(args.host, args.port, args.model_path))
+    except KeyboardInterrupt:
+        logger.info("服务器已手动停止") 

@@ -107,7 +107,13 @@ class S2SPipelineBridge:
             if "whisper" in stt_model.lower():
                 self.module_kwargs.stt = "whisper"
                 if hasattr(self.whisper_stt_handler_kwargs, "model_name"):
-                    self.whisper_stt_handler_kwargs.model_name = stt_model
+                    # 确保Whisper模型名称格式正确
+                    if stt_model == "whisper-large-v3":
+                        stt_model = "openai/whisper-large-v3"
+                    # 确保distil-whisper模型名称格式正确
+                    elif stt_model == "distil-large-v3":
+                        stt_model = "distil-whisper/distil-large-v3"
+                    self.whisper_stt_handler_kwargs.stt_model_name = stt_model
             elif "paraformer" in stt_model.lower():
                 self.module_kwargs.stt = "paraformer"
         

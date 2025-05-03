@@ -78,3 +78,786 @@
 2025-04-29 18:07:23,236 - S2SWebSocketServer - INFO - 设置模型 tts: melo
 2025-04-29 18:07:28,868 - S2SPipelineBridge - WARNING - S2S管道未运行
 2025-04-29 18:07:28,870 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 55163)，当前连接数: 0
+2025-04-29 20:20:17,366 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 20:20:17,411 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-04-29 20:20:17,411 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-04-29 20:20:27,672 - websockets.server - INFO - connection open
+2025-04-29 20:20:27,673 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 62610)，当前连接数: 1
+2025-04-29 20:20:27,698 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 20:20:27,698 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 20:20:27,698 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 20:20:27,698 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 20:20:27,698 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 20:20:27,698 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 20:20:27,698 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 20:20:27,704 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 20:20:33,662 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 20:20:33,662 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 20:20:33,663 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 20:20:34,579 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 20:20:34,579 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 20:20:35,353 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:35,468 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:35,591 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:35,711 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:35,832 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:35,952 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,072 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,188 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,311 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,431 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,551 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,671 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,788 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:36,853 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 20:20:36,854 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 20:20:36,856 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 20:20:36,862 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:20:57,699 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:21:27,967 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:21:57,705 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:22:27,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:22:57,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:23:36,038 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:23:57,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:24:27,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:25:15,974 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:26:15,974 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:27:15,970 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:28:15,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:29:15,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:29:27,972 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:29:57,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:30:49,236 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:30:57,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:31:27,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:31:51,413 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 20:31:51,414 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 20:31:51,414 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 20:31:51,963 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 20:31:51,963 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 20:31:52,983 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:31:53,054 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 20:31:53,054 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 20:31:53,054 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 20:31:53,061 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 20:31:57,709 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:32:27,708 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 20:32:57,708 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:09:52,111 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 21:09:52,133 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-04-29 21:09:52,138 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-04-29 21:10:22,338 - websockets.server - INFO - connection open
+2025-04-29 21:10:22,339 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 57187)，当前连接数: 1
+2025-04-29 21:10:22,371 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:10:22,371 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:10:22,371 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:10:22,371 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:10:22,371 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:10:22,376 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:10:22,376 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:10:22,377 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:10:48,023 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-04-29 21:10:52,726 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:11:06,543 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 21:11:06,550 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 21:11:06,550 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 21:11:07,585 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 21:11:07,586 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:11:07,921 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,036 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,156 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,281 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,400 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,517 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,638 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,760 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,878 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:08,998 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,121 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,242 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,359 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,476 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,601 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,721 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,837 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:09,956 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,079 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,198 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,319 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,439 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,559 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,680 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:10,727 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 21:11:10,728 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 21:11:10,740 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:11:10,741 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:11:22,377 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:11:39,983 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:11:39,983 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:11:39,984 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:39,985 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:11:39,986 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:39,986 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:11:39,987 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:39,987 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:11:41,023 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:11:41,023 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:11:41,025 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:41,025 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:11:41,026 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:41,026 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:11:41,027 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:41,027 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:11:52,373 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:11:57,428 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:11:57,429 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 57187)，当前连接数: 0
+2025-04-29 21:11:57,819 - websockets.server - INFO - connection open
+2025-04-29 21:11:57,819 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 57384)，当前连接数: 1
+2025-04-29 21:11:57,825 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:11:57,825 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:11:57,825 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:57,825 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:11:57,825 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:57,825 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:11:57,825 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:11:57,825 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:12:00,767 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-04-29 21:12:05,112 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 21:12:05,113 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 21:12:05,113 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 21:12:05,626 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 21:12:05,626 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:12:05,943 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 21:12:05,943 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 21:12:05,943 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:12:27,831 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:12:57,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:13:27,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:13:57,973 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:14:27,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:55:12,280 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 21:55:12,317 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-04-29 21:55:12,317 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-04-29 21:55:33,625 - websockets.server - INFO - connection open
+2025-04-29 21:55:33,626 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 61778)，当前连接数: 1
+2025-04-29 21:55:33,667 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:55:33,667 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:55:33,667 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:55:33,667 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:55:33,667 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:55:33,667 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:55:33,667 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:55:33,672 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:55:39,989 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-04-29 21:55:51,972 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 21:55:51,972 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 21:55:51,972 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 21:55:52,946 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 21:55:52,946 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:55:53,752 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:53,872 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:53,987 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,111 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,231 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,348 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,470 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,591 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,710 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,831 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:54,952 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,071 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,189 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,310 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,433 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,551 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,673 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,787 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:55,911 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,030 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,151 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,273 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,392 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,511 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,628 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,746 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,873 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:56,992 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,111 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,226 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,350 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,471 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,586 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,712 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,830 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:57,948 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,066 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,191 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,311 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,433 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,552 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,671 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,788 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:58,914 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:59,031 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:59,150 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:59,271 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:55:59,328 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 21:55:59,329 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 21:55:59,341 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:55:59,341 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 21:56:03,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:56:33,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:57:03,195 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:57:03,195 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:57:03,199 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:57:03,199 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:57:03,200 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:57:03,200 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:57:03,201 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:57:03,201 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:57:03,669 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:57:05,592 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 21:57:05,592 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 61778)，当前连接数: 0
+2025-04-29 21:57:05,808 - websockets.server - INFO - connection open
+2025-04-29 21:57:05,809 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 61994)，当前连接数: 1
+2025-04-29 21:57:05,811 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 21:57:05,812 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 21:57:05,812 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:57:05,813 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 21:57:05,813 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:57:05,813 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 21:57:05,814 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 21:57:05,814 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 21:57:10,706 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-04-29 21:57:35,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:58:05,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:58:35,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:59:05,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 21:59:35,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:00:15,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:01:15,970 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:02:03,830 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:02:05,968 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:02:35,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:03:15,969 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:03:35,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:04:05,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:05:06,974 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:06:07,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:07:08,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:08:09,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:09:10,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:10:11,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:11:12,969 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:12:13,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:13:14,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:14:15,968 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:15:11,034 - websockets.server - INFO - connection open
+2025-04-29 22:15:11,035 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 64849)，当前连接数: 2
+2025-04-29 22:15:11,083 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 22:15:11,084 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 22:15:11,084 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:15:11,084 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 22:15:11,085 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:15:11,085 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 22:15:11,086 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:15:11,086 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 22:15:13,849 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-04-29 22:15:15,973 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:15:41,084 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:15:58,431 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:16:01,157 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 61994)，当前连接数: 1
+2025-04-29 22:16:11,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:16:41,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:17:11,090 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:17:41,084 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:17:42,433 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 22:17:42,433 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 64849)，当前连接数: 0
+2025-04-29 22:17:42,646 - websockets.server - INFO - connection open
+2025-04-29 22:17:42,646 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 62421)，当前连接数: 1
+2025-04-29 22:17:42,649 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 22:17:42,650 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 22:17:42,650 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:17:42,651 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 22:17:42,651 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:17:42,651 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 22:17:42,651 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:17:42,651 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 22:17:44,014 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 22:17:44,015 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 62421)，当前连接数: 0
+2025-04-29 22:17:44,217 - websockets.server - INFO - connection open
+2025-04-29 22:17:44,218 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 62427)，当前连接数: 1
+2025-04-29 22:17:44,224 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 22:17:44,225 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 22:17:44,225 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:17:44,226 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 22:17:44,226 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:17:44,226 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 22:17:44,226 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:17:44,226 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 22:18:14,970 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:18:53,786 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-04-29 22:18:53,802 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-04-29 22:18:53,802 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-04-29 22:18:53,962 - websockets.server - INFO - connection open
+2025-04-29 22:18:53,963 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 62577)，当前连接数: 1
+2025-04-29 22:18:53,966 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 22:18:53,966 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 22:18:53,967 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:18:53,967 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 22:18:53,967 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:18:53,968 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 22:18:53,968 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:18:53,968 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 22:19:23,976 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:19:53,229 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 22:19:53,230 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 22:19:53,230 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:19:53,231 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 22:19:53,231 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:19:53,231 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 22:19:53,232 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:19:53,232 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 22:19:53,967 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:20:24,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:20:31,588 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-04-29 22:20:31,592 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-04-29 22:20:31,592 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-04-29 22:20:32,637 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-04-29 22:20:32,637 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 22:20:33,518 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:33,633 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:33,753 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:33,880 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:33,999 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,120 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,238 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,354 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,477 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,597 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,717 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,838 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:34,954 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,078 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,193 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,316 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,433 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,553 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,677 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,798 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:35,917 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,032 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,157 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,273 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,396 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,515 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,635 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,753 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,875 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:36,993 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,112 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,233 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,353 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,481 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,594 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,719 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,833 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:37,953 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,075 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,198 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,312 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,438 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,557 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,678 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,796 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:38,918 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,037 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,157 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,278 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,400 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,517 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,639 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,758 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,878 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:39,996 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,118 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,238 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,358 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,478 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,598 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,721 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,839 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:40,959 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,080 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,196 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,313 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,437 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,558 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,675 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,798 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:41,918 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,039 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,156 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,272 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,398 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,517 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,641 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,758 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,877 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:42,995 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,116 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,236 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,357 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,478 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,597 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,717 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,837 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:43,957 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,078 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,198 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,313 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,437 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,557 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,676 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,795 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:44,893 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-04-29 22:20:44,894 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-04-29 22:20:44,894 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 22:20:44,900 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-04-29 22:20:53,973 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:21:24,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:21:54,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:22:24,968 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:22:54,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:23:24,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:23:54,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:24:24,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:24:54,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:25:24,960 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:25:53,967 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:26:11,135 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 22:26:11,135 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 62577)，当前连接数: 0
+2025-04-29 22:26:11,532 - websockets.server - INFO - connection open
+2025-04-29 22:26:11,532 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 63499)，当前连接数: 1
+2025-04-29 22:26:11,538 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-04-29 22:26:11,540 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-04-29 22:26:11,540 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:26:11,540 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-04-29 22:26:11,540 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:26:11,540 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-04-29 22:26:11,540 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-04-29 22:26:11,540 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-04-29 22:26:26,861 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-04-29 22:26:41,544 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:27:11,541 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:27:41,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:28:11,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:28:41,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:29:11,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:29:41,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:30:11,553 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:30:41,974 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:31:11,975 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:32:12,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:33:13,965 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:34:14,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:34:55,886 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:35:11,541 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:35:41,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:36:11,965 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:37:12,969 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:38:13,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:39:14,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:40:15,974 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:41:15,965 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:42:15,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:43:15,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:43:41,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:44:11,965 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:45:12,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:45:41,975 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:46:11,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:46:41,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:47:15,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:48:15,964 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:49:15,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:50:15,967 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:51:15,969 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:52:15,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:53:15,970 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:54:15,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:55:15,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:56:15,958 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:57:15,966 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:58:15,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 22:59:15,968 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:00:15,971 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:01:15,970 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:02:15,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:02:41,959 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:03:11,963 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:03:41,540 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:04:11,973 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:04:41,962 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-04-29 23:04:53,303 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-04-29 23:04:53,303 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 63499)，当前连接数: 0
+2025-05-03 17:33:45,385 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-05-03 17:33:45,416 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 17:33:45,416 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 17:34:09,698 - websockets.server - INFO - connection open
+2025-05-03 17:34:09,698 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 54784)，当前连接数: 1
+2025-05-03 17:34:09,764 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-05-03 17:34:09,764 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 17:34:09,765 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:34:09,765 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 17:34:09,766 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:34:09,766 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 17:34:09,766 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:34:09,767 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 17:34:20,832 - S2SWebSocketServer - DEBUG - 收到消息: response
+2025-05-03 17:34:39,767 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-05-03 17:35:00,466 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:35:00,466 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 54784)，当前连接数: 0
+2025-05-03 17:35:01,066 - websockets.server - INFO - connection open
+2025-05-03 17:35:01,066 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 55066)，当前连接数: 1
+2025-05-03 17:35:01,073 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-05-03 17:35:01,073 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 17:35:01,074 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:35:01,074 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 17:35:01,075 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:35:01,075 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 17:35:01,076 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:35:01,076 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 17:35:01,991 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-05-03 17:35:01,992 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 17:35:01,992 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 17:35:03,089 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 17:35:03,089 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:35:05,021 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,143 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,262 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,384 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,503 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,623 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,742 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,862 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:05,982 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,102 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,221 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,342 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,462 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,583 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,702 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,822 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:06,942 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,061 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,183 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,302 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,425 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,542 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,663 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,781 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:07,903 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,023 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,144 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,262 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,382 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,503 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,623 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,742 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,862 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:08,982 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:09,096 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-05-03 17:35:09,096 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 17:35:09,096 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:35:09,102 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:35:31,970 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-05-03 17:36:01,961 - S2SWebSocketServer - DEBUG - 收到消息: ping
+2025-05-03 17:45:52,784 - S2SWebSocketServer - DEBUG - 调试模式已启用
+2025-05-03 17:45:52,800 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 17:45:52,800 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 17:46:24,610 - websockets.server - INFO - connection open
+2025-05-03 17:46:24,610 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 59935)，当前连接数: 1
+2025-05-03 17:46:24,642 - S2SWebSocketServer - DEBUG - 收到消息: set_language
+2025-05-03 17:46:24,642 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 17:46:24,642 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:46:24,645 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 17:46:24,645 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:46:24,645 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 17:46:24,646 - S2SWebSocketServer - DEBUG - 收到消息: set_model
+2025-05-03 17:46:24,646 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 17:46:31,729 - S2SWebSocketServer - DEBUG - 收到消息: start_listening
+2025-05-03 17:46:31,730 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 17:46:31,730 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 17:46:33,214 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 17:46:33,214 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:46:34,640 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:34,761 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:34,881 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:35,001 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:35,116 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:35,242 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:35,355 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:46:35,380 - S2SWebSocketServer - DEBUG - 收到消息: stop_listening
+2025-05-03 17:46:35,380 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 17:46:35,381 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:46:35,388 - S2SWebSocketServer - DEBUG - 收到消息: audio_data
+2025-05-03 17:47:10,575 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 17:47:10,577 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 17:47:10,971 - websockets.server - INFO - connection open
+2025-05-03 17:47:10,972 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 60080)，当前连接数: 1
+2025-05-03 17:47:10,974 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 17:47:10,974 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 17:47:10,975 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 17:47:10,975 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 17:47:13,118 - websockets.server - INFO - connection open
+2025-05-03 17:47:13,118 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 60099)，当前连接数: 2
+2025-05-03 17:47:13,161 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 17:47:13,161 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 17:47:13,162 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 17:47:13,162 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 17:47:20,023 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 17:47:20,023 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 17:47:31,028 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 17:47:31,031 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:47:31,031 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 17:47:31,032 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 17:47:41,446 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 17:47:41,446 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:47:41,449 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 17:47:41,449 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:47:41,450 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 17:47:41,450 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 17:47:51,516 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 17:47:51,516 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:47:51,519 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 17:47:51,519 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:48:19,911 - websockets.server - INFO - connection open
+2025-05-03 17:48:19,911 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 54708)，当前连接数: 3
+2025-05-03 17:48:19,948 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 17:48:19,948 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 17:48:19,949 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 17:48:19,950 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 17:48:21,049 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 60099)，当前连接数: 2
+2025-05-03 17:48:21,590 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 60080)，当前连接数: 1
+2025-05-03 17:48:36,499 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 17:48:36,499 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 17:48:46,706 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 17:48:46,706 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 17:48:46,712 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 17:48:46,712 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:18:55,583 - websockets.server - INFO - connection open
+2025-05-03 18:18:55,583 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 63865)，当前连接数: 2
+2025-05-03 18:18:55,625 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 18:18:55,625 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 18:18:55,625 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 18:18:55,625 - S2SWebSocketServer - INFO - 设置模型 tts: melo
+2025-05-03 18:18:56,991 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:18:56,991 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:19:06,895 - S2SPipelineBridge - ERROR - 启动S2S管道失败: open file failed because of errno 2 on fopen: No such file or directory, file path: C:\Users\梓桓/.cache\torch\hub\snakers4_silero-vad_master\src\silero_vad\data\silero_vad.jit
+2025-05-03 18:19:06,895 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:19:16,710 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 63865)，当前连接数: 1
+2025-05-03 18:31:24,824 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:31:24,825 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 54708)，当前连接数: 0
+2025-05-03 18:31:45,446 - S2SWebSocketServer - WARNING - 端口 8766 被占用，尝试使用端口 8767
+2025-05-03 18:31:45,446 - websockets.server - INFO - server listening on 127.0.0.1:8767
+2025-05-03 18:31:45,446 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8767
+2025-05-03 18:34:43,238 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 18:34:43,238 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 18:34:43,459 - websockets.server - INFO - connection open
+2025-05-03 18:34:43,459 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 54124)，当前连接数: 1
+2025-05-03 18:34:43,459 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 18:34:43,467 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 18:34:43,468 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 18:34:43,470 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 18:34:47,757 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:34:47,757 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:35:08,181 - S2SPipelineBridge - ERROR - 启动S2S管道失败: Remote end closed connection without response
+2025-05-03 18:35:08,181 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:35:08,187 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 18:35:08,187 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:35:14,371 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:35:14,371 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:36:22,295 - S2SPipelineBridge - ERROR - 启动S2S管道失败: We couldn't connect to 'https://huggingface.co' to load this file, couldn't find it in the cached files and it looks like whisper-large-v3 is not the path to a directory containing a file named config.json.
+Checkout your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-05-03 18:36:22,295 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:36:22,311 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 18:36:22,311 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:37:00,478 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:37:00,478 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:37:02,522 - S2SPipelineBridge - ERROR - 启动S2S管道失败: whisper-large-v3 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-05-03 18:37:02,522 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:37:04,215 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 18:37:04,215 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:37:08,973 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:37:08,973 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:37:31,028 - S2SPipelineBridge - ERROR - 启动S2S管道失败: whisper-large-v3 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-05-03 18:37:31,028 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:37:31,040 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 18:37:31,040 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:37:46,231 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:37:46,231 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 54124)，当前连接数: 0
+2025-05-03 18:37:46,311 - websockets.server - INFO - connection open
+2025-05-03 18:37:46,312 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 50965)，当前连接数: 1
+2025-05-03 18:37:46,324 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 18:37:46,324 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 18:37:46,324 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 18:37:46,324 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 18:38:16,735 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:38:16,735 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:38:39,175 - S2SPipelineBridge - ERROR - 启动S2S管道失败: whisper-large-v3 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-05-03 18:38:39,185 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:38:39,185 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 18:38:39,185 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:38:39,185 - S2SWebSocketServer - ERROR - 处理消息时出错: no close frame received or sent
+2025-05-03 18:38:39,202 - S2SWebSocketServer - INFO - 客户端连接关闭
+2025-05-03 18:38:39,202 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:38:39,215 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 50965)，当前连接数: 0
+2025-05-03 18:38:39,215 - websockets.server - INFO - connection open
+2025-05-03 18:38:39,215 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 54496)，当前连接数: 1
+2025-05-03 18:38:39,215 - websockets.server - ERROR - opening handshake failed
+Traceback (most recent call last):
+  File "F:\Anaconda\envs\speech\Lib\site-packages\websockets\asyncio\server.py", line 354, in conn_handler
+    await connection.handshake(
+  File "F:\Anaconda\envs\speech\Lib\site-packages\websockets\asyncio\server.py", line 140, in handshake
+    async with self.send_context(expected_state=CONNECTING):
+  File "F:\Anaconda\envs\speech\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Anaconda\envs\speech\Lib\site-packages\websockets\asyncio\connection.py", line 934, in send_context
+    raise self.protocol.close_exc from original_exc
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2025-05-03 18:38:39,231 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 18:38:39,232 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 18:38:39,234 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 18:38:39,235 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 18:39:04,849 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:39:04,849 - S2SWebSocketServer - INFO - 客户端断开: ('127.0.0.1', 54496)，当前连接数: 0
+2025-05-03 18:39:04,899 - websockets.server - INFO - connection open
+2025-05-03 18:39:04,900 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 54593)，当前连接数: 1
+2025-05-03 18:39:04,904 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 18:39:04,904 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 18:39:04,905 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 18:39:04,905 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 18:39:05,771 - S2SWebSocketServer - INFO - 接收到开始监听请求
+2025-05-03 18:39:05,771 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:39:27,556 - S2SPipelineBridge - ERROR - 启动S2S管道失败: whisper-large-v3 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-05-03 18:39:27,556 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:39:27,556 - S2SWebSocketServer - INFO - 接收到停止监听请求
+2025-05-03 18:39:27,566 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 18:55:45,690 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 18:55:45,691 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 18:55:57,227 - websockets.server - INFO - connection open
+2025-05-03 18:55:57,228 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 58701)，当前连接数: 1
+2025-05-03 18:55:57,267 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 18:55:57,269 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 18:55:57,271 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 18:55:57,272 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 18:56:05,332 - S2SWebSocketServer - INFO - 收到开始监听请求
+2025-05-03 18:56:05,336 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 18:56:15,357 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
