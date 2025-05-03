@@ -13,6 +13,7 @@ from rich.console import Console
 import logging
 from nltk import sent_tokenize
 
+# 在模块顶部定义全局logger
 logger = logging.getLogger(__name__)
 
 console = Console()
@@ -49,6 +50,10 @@ class LanguageModelHandler(BaseHandler):
         init_chat_role=None,
         init_chat_prompt="You are a helpful AI assistant.",
     ):
+        # 使用局部logger变量
+        log = logging.getLogger(__name__)
+        log.info(f"Setting up LanguageModelHandler with model {model_name}")
+        
         self.device = device
         self.torch_dtype = getattr(torch, torch_dtype)
 
@@ -82,7 +87,9 @@ class LanguageModelHandler(BaseHandler):
         self.warmup()
 
     def warmup(self):
-        logger.info(f"Warming up {self.__class__.__name__}")
+        # 使用局部logger变量
+        log = logging.getLogger(__name__)
+        log.info(f"Warming up {self.__class__.__name__}")
 
         dummy_input_text = "Repeat the word 'home'."
         dummy_chat = [{"role": self.user_role, "content": dummy_input_text}]
@@ -112,12 +119,15 @@ class LanguageModelHandler(BaseHandler):
             end_event.record()
             torch.cuda.synchronize()
 
-            logger.info(
+            log.info(
                 f"{self.__class__.__name__}:  warmed up! time: {start_event.elapsed_time(end_event) * 1e-3:.3f} s"
             )
 
     def process(self, prompt):
-        logger.debug("infering language model...")
+        # 使用局部logger变量
+        log = logging.getLogger(__name__)
+        log.debug("infering language model...")
+        
         language_code = None
         if isinstance(prompt, tuple):
             prompt, language_code = prompt

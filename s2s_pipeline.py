@@ -53,6 +53,8 @@ os.environ["TORCHINDUCTOR_CACHE_DIR"] = os.path.join(CURRENT_DIR, "tmp")
 console = Console()
 logging.getLogger("numba").setLevel(logging.WARNING)  # quiet down numba logs
 
+# 定义全局logger变量
+logger = logging.getLogger(__name__)
 
 def rename_args(args, prefix):
     """
@@ -105,7 +107,7 @@ def setup_logger(log_level):
         level=log_level.upper(),
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
-    logger = logging.getLogger(__name__)
+    logger.setLevel(log_level.upper())
 
     # torch compile logs
     if log_level == "debug":

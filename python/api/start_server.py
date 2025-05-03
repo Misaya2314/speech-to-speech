@@ -16,6 +16,7 @@ def parse_args():
     parser.add_argument("--host", type=str, default="127.0.0.1", help="服务器主机地址")
     parser.add_argument("--port", type=int, default=8766, help="服务器端口号")
     parser.add_argument("--debug", action="store_true", help="启用调试模式")
+    parser.add_argument("--no_preload", action="store_true", help="禁用模型预加载，改为按需加载")
     return parser.parse_args()
 
 def start_server(args):
@@ -34,6 +35,9 @@ def start_server(args):
     
     if args.debug:
         cmd.append("--debug")
+    
+    if args.no_preload:
+        cmd.append("--no_preload")
     
     # 启动服务器进程
     print(f"启动S2S WebSocket服务器: {' '.join(cmd)}")

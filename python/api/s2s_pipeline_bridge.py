@@ -28,6 +28,7 @@ import s2s_pipeline
 from VAD.vad_handler import VADHandler
 from utils.thread_manager import ThreadManager
 
+# 在模块顶部定义logger
 logger = logging.getLogger("S2SPipelineBridge")
 
 class S2SPipelineBridge:
@@ -36,6 +37,9 @@ class S2SPipelineBridge:
     """
     
     def __init__(self):
+        # 使用模块级logger
+        logger.info("初始化S2SPipelineBridge")
+        
         self.thread_manager = None
         self.pipeline_running = False
         self.stop_event = threading.Event()
@@ -56,13 +60,16 @@ class S2SPipelineBridge:
     
     def _init_arguments(self):
         """初始化所有参数类"""
+        # 使用模块级logger
+        logger.info("初始化参数")
+        
         # 模块参数
         self.module_kwargs = ModuleArguments(
             mode="local",
             device="cpu",
             stt="whisper",
             llm="transformers",
-            tts="melo",
+            tts="parler",
             log_level="info"
         )
         
@@ -91,6 +98,9 @@ class S2SPipelineBridge:
     
     def update_config(self, client_config: Dict[str, Any]):
         """根据WebSocket客户端配置更新管道配置"""
+        # 使用模块级logger
+        logger.info(f"更新配置: {client_config}")
+        
         self.client_config.update(client_config)
         
         # 更新语言设置
@@ -148,13 +158,14 @@ class S2SPipelineBridge:
     
     def start_pipeline(self):
         """启动S2S管道"""
+        # 使用模块级logger
+        logger.info("正在启动S2S管道...")
+        
         if self.pipeline_running:
             logger.warning("S2S管道已经在运行中")
             return False
         
-        try:
-            logger.info("正在启动S2S管道...")
-            
+        try:            
             # 准备参数
             s2s_pipeline.prepare_all_args(
                 self.module_kwargs,
@@ -216,6 +227,7 @@ class S2SPipelineBridge:
     
     def stop_pipeline(self):
         """停止S2S管道"""
+        # 使用模块级logger
         if not self.pipeline_running:
             logger.warning("S2S管道未运行")
             return
@@ -239,6 +251,7 @@ class S2SPipelineBridge:
     
     def send_audio(self, audio_data):
         """发送音频数据到输入队列"""
+        # 使用模块级logger
         if not self.pipeline_running:
             logger.warning("S2S管道未运行，无法发送音频数据")
             return False
@@ -253,6 +266,7 @@ class S2SPipelineBridge:
     
     def send_text(self, text, language="en"):
         """直接发送文本到LLM，绕过STT阶段"""
+        # 使用模块级logger
         if not self.pipeline_running:
             logger.warning("S2S管道未运行，无法发送文本")
             return False
@@ -270,6 +284,7 @@ class S2SPipelineBridge:
     
     def set_listening(self, should_listen):
         """设置是否监听音频输入"""
+        # 使用模块级logger
         if should_listen:
             self.should_listen.set()
             logger.info("已启用音频监听")

@@ -6,6 +6,9 @@ import argparse
 def main():
     parser = argparse.ArgumentParser(description='使用本地模型运行Speech-to-Speech')
     parser.add_argument('--model_dir', type=str, default='./models', help='模型所在的本地目录')
+    parser.add_argument('--no_preload', action='store_true', help='禁用模型预加载，改为按需加载')
+    parser.add_argument('--host', type=str, default='127.0.0.1', help='WebSocket服务器主机地址')
+    parser.add_argument('--port', type=int, default=8766, help='WebSocket服务器端口')
     
     args = parser.parse_args()
     
@@ -39,17 +42,28 @@ def main():
         print("请先运行 python download_models.py 下载模型")
         return 1
     
+    # 准备命令行参数
+    cmd = [
+        sys.executable,
+        "python/api/websocket_server.py",
+        "--model_path", stt_model_path,
+        "--host", args.host,
+        "--port", str(args.port)
+    ]
+    
+    # 添加预加载选项
+    if args.no_preload:
+        cmd.append("--no_preload")
+    else:
+        print("模型将在服务器启动时预加载，这可能需要一些时间...")
+    
     # 运行WebSocket服务器
     print(f"使用本地模型路径: {stt_model_path}")
-    print("启动WebSocket服务器...")
+    print(f"启动WebSocket服务器 {args.host}:{args.port}...")
     
     # 使用子进程运行服务器
     try:
-        subprocess.run([
-            sys.executable,
-            "python/api/websocket_server.py",
-            "--model_path", stt_model_path
-        ])
+        subprocess.run(cmd)
         return 0
     except Exception as e:
         print(f"运行服务器时出错: {str(e)}")

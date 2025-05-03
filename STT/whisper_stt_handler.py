@@ -9,6 +9,7 @@ from baseHandler import BaseHandler
 from rich.console import Console
 import logging
 
+# 在模块顶部定义全局logger
 logger = logging.getLogger(__name__)
 console = Console()
 
@@ -42,6 +43,10 @@ class WhisperSTTHandler(BaseHandler):
         language=None,
         gen_kwargs={},
     ):
+        # 使用类变量而非全局变量
+        log = logging.getLogger(__name__)
+        log.info(f"Setting up WhisperSTTHandler with model {model_name}")
+        
         self.device = device
         self.torch_dtype = getattr(torch, torch_dtype)
         self.compile_mode = compile_mode
@@ -80,7 +85,9 @@ class WhisperSTTHandler(BaseHandler):
         return {"input_features": input_features, "attention_mask": attention_mask}
 
     def warmup(self):
-        logger.info(f"Warming up {self.__class__.__name__}")
+        # 使用局部logger变量而不是全局变量
+        log = logging.getLogger(__name__)
+        log.info(f"Warming up {self.__class__.__name__}")
 
         # 2 warmup steps for no compile or compile mode with CUDA graphs capture
         n_steps = 1 if self.compile_mode == "default" else 2
@@ -123,13 +130,15 @@ class WhisperSTTHandler(BaseHandler):
         if self.device == "cuda":
             end_event.record()
             torch.cuda.synchronize()
-
-            logger.info(
+            
+            log.info(
                 f"{self.__class__.__name__}:  warmed up! time: {start_event.elapsed_time(end_event) * 1e-3:.3f} s"
             )
 
     def process(self, spoken_prompt):
-        logger.debug("infering whisper...")
+        # 使用局部logger变量而不是全局变量
+        log = logging.getLogger(__name__)
+        log.debug("infering whisper...")
 
         global pipeline_start
         pipeline_start = perf_counter()
@@ -139,7 +148,7 @@ class WhisperSTTHandler(BaseHandler):
         language_code = self.processor.tokenizer.decode(pred_ids[0, 1])[2:-2]  # remove "<|" and "|>"
 
         if language_code not in SUPPORTED_LANGUAGES:  # reprocess with the last language
-            logger.warning("Whisper detected unsupported language:", language_code)
+            log.warning(f"Whisper detected unsupported language: {language_code}")
             gen_kwargs = copy(self.gen_kwargs)
             gen_kwargs['language'] = self.last_language
             language_code = self.last_language
@@ -152,9 +161,9 @@ class WhisperSTTHandler(BaseHandler):
         )[0]
         language_code = self.processor.tokenizer.decode(pred_ids[0, 1])[2:-2] # remove "<|" and "|>"
 
-        logger.debug("finished whisper inference")
+        log.debug("finished whisper inference")
         console.print(f"[yellow]USER: {pred_text}")
-        logger.debug(f"Language Code Whisper: {language_code}")
+        log.debug(f"Language Code Whisper: {language_code}")
 
         if self.start_language == "auto":
             language_code += "-auto"

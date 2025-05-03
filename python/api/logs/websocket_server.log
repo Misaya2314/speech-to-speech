@@ -861,3 +861,208 @@ If this is a private repository, make sure to pass a token having permission to 
 2025-05-03 18:56:05,332 - S2SWebSocketServer - INFO - 收到开始监听请求
 2025-05-03 18:56:05,336 - S2SPipelineBridge - INFO - 正在启动S2S管道...
 2025-05-03 18:56:15,357 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 19:08:59,380 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 19:08:59,398 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 19:09:27,869 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 19:15:27,484 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 19:15:38,898 - S2SPipelineBridge - ERROR - 启动S2S管道失败: name 'logger' is not defined
+2025-05-03 19:15:38,898 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 19:15:39,077 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 19:15:39,108 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 19:15:39,108 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 19:26:56,069 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 19:26:56,069 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 19:26:57,701 - S2SPipelineBridge - ERROR - 启动S2S管道失败: name 'logger' is used prior to global declaration (whisper_stt_handler.py, line 135)
+2025-05-03 19:26:57,701 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 19:26:57,702 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 19:26:57,744 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 19:26:57,744 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 19:27:26,365 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 19:27:26,365 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 19:27:27,790 - S2SPipelineBridge - ERROR - 启动S2S管道失败: name 'logger' is used prior to global declaration (whisper_stt_handler.py, line 135)
+2025-05-03 19:27:27,791 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 19:27:27,792 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 19:27:27,806 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 19:27:27,807 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 19:30:44,228 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 19:30:44,228 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 19:30:49,279 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 19:30:53,366 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 19:36:51,999 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 19:36:56,136 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 19:37:07,530 - S2SPipelineBridge - ERROR - 启动S2S管道失败: name 'logger' is not defined
+2025-05-03 19:37:07,532 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 19:37:07,742 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 19:37:07,766 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 19:37:07,766 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 19:43:36,889 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 19:43:36,891 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 19:43:42,726 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 19:43:46,203 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 19:49:37,652 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 19:49:42,370 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 19:49:53,530 - S2SPipelineBridge - ERROR - 启动S2S管道失败: name 'logger' is not defined
+2025-05-03 19:49:53,544 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 19:49:53,737 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 19:49:53,784 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 19:49:53,784 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 19:58:42,287 - S2SPipelineBridge - INFO - 初始化S2SPipelineBridge
+2025-05-03 19:58:42,296 - S2SPipelineBridge - INFO - 初始化参数
+2025-05-03 19:58:42,297 - S2SPipelineBridge - INFO - 更新配置: {'language': 'en', 'stt_model': 'openai/whisper-large-v3', 'lm_model': 'meta-llama/Llama-2-7b-chat-hf', 'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 20:33:49,856 - websockets.server - INFO - server closing
+2025-05-03 20:33:49,856 - websockets.server - INFO - server closed
+2025-05-03 20:33:59,495 - S2SPipelineBridge - INFO - 初始化S2SPipelineBridge
+2025-05-03 20:33:59,495 - S2SPipelineBridge - INFO - 初始化参数
+2025-05-03 20:33:59,495 - S2SPipelineBridge - INFO - 更新配置: {'language': 'en', 'stt_model': 'openai/whisper-large-v3', 'lm_model': 'meta-llama/Llama-2-7b-chat-hf', 'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 20:33:59,495 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 20:33:59,495 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 20:34:04,639 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 20:34:09,223 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 20:40:07,166 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 20:40:11,838 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 20:40:22,956 - S2SPipelineBridge - ERROR - 启动S2S管道失败: name 'logger' is not defined
+2025-05-03 20:40:22,956 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 20:40:23,135 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 20:40:23,157 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 20:40:23,157 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 20:46:01,968 - S2SPipelineBridge - INFO - 初始化S2SPipelineBridge
+2025-05-03 20:46:01,968 - S2SPipelineBridge - INFO - 初始化参数
+2025-05-03 20:46:01,968 - S2SPipelineBridge - INFO - 更新配置: {'language': 'en', 'stt_model': 'openai/whisper-large-v3', 'lm_model': 'meta-llama/Llama-2-7b-chat-hf', 'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 20:46:01,968 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 20:46:01,968 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 20:46:07,224 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 20:46:10,619 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 20:51:55,095 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 20:51:59,253 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 20:52:10,520 - s2s_pipeline - ERROR - Error importing MeloTTSHandler. You might need to run: python -m unidic download
+2025-05-03 20:52:10,536 - S2SPipelineBridge - ERROR - 启动S2S管道失败: 
+----------------------------------------------------------
+
+Failed initializing MeCab. Please see the README for possible solutions:
+
+    https://github.com/SamuraiT/mecab-python3#common-issues
+
+If you are still having trouble, please file an issue here, and include the
+ERROR DETAILS below:
+
+    https://github.com/SamuraiT/mecab-python3/issues
+
+issueを英語で書く必要はありません。
+
+------------------- ERROR DETAILS ------------------------
+arguments: 
+default dictionary path: F:\Anaconda\envs\speech\Lib\site-packages\unidic\dicdir
+[ifs] no such file or directory: F:\Anaconda\envs\speech\Lib\site-packages\unidic\dicdir\mecabrc
+----------------------------------------------------------
+
+2025-05-03 20:52:10,537 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 20:52:10,725 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 20:52:10,740 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 20:52:10,740 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 21:01:07,705 - S2SPipelineBridge - INFO - 初始化S2SPipelineBridge
+2025-05-03 21:01:07,706 - S2SPipelineBridge - INFO - 初始化参数
+2025-05-03 21:01:07,706 - S2SPipelineBridge - INFO - 更新配置: {'language': 'en', 'stt_model': 'openai/whisper-large-v3', 'lm_model': 'meta-llama/Llama-2-7b-chat-hf', 'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 21:01:07,707 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 21:01:07,707 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:01:12,697 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 21:01:16,880 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 21:07:11,983 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 21:07:16,593 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 21:07:27,017 - parler_tts.modeling_parler_tts - WARNING - Flash attention 2 is not installed
+2025-05-03 21:07:28,011 - TTS.parler_handler - WARNING - Parler TTS works best with flash attention 2, but is not installed
+        Given that CUDA is available in this system, you can install flash attention 2 with `uv pip install flash-attn --no-build-isolation`
+2025-05-03 21:07:28,011 - S2SPipelineBridge - ERROR - 启动S2S管道失败: ParlerTTSHandler.setup() got an unexpected keyword argument 'description'
+2025-05-03 21:07:28,011 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 21:07:28,203 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 21:07:28,242 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 21:07:28,242 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 21:07:41,246 - websockets.server - INFO - connection open
+2025-05-03 21:07:41,246 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 52090)，当前连接数: 1
+2025-05-03 21:07:41,304 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 21:07:41,304 - S2SPipelineBridge - INFO - 更新配置: {'language': 'zh'}
+2025-05-03 21:07:41,307 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 21:07:41,307 - S2SPipelineBridge - INFO - 更新配置: {'stt_model': 'whisper-large-v3'}
+2025-05-03 21:07:41,307 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 21:07:41,307 - S2SPipelineBridge - INFO - 更新配置: {'lm_model': 'meta-llama/Llama-2-7b-chat-hf'}
+2025-05-03 21:07:41,307 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 21:07:41,307 - S2SPipelineBridge - INFO - 更新配置: {'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 21:07:55,373 - S2SWebSocketServer - INFO - 收到开始监听请求
+2025-05-03 21:07:55,374 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:07:56,830 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model openai/whisper-large-v3
+2025-05-03 21:16:58,979 - S2SPipelineBridge - INFO - 初始化S2SPipelineBridge
+2025-05-03 21:16:58,983 - S2SPipelineBridge - INFO - 初始化参数
+2025-05-03 21:16:58,984 - S2SPipelineBridge - INFO - 更新配置: {'language': 'en', 'stt_model': 'openai/whisper-large-v3', 'lm_model': 'meta-llama/Llama-2-7b-chat-hf', 'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 21:16:58,984 - S2SWebSocketServer - INFO - 正在预加载和预热模型，请稍候...
+2025-05-03 21:16:58,984 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:17:04,442 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 21:17:08,114 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 21:24:31,603 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 21:24:41,105 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 21:24:51,770 - parler_tts.modeling_parler_tts - WARNING - Flash attention 2 is not installed
+2025-05-03 21:24:52,848 - TTS.parler_handler - WARNING - Parler TTS works best with flash attention 2, but is not installed
+        Given that CUDA is available in this system, you can install flash attention 2 with `uv pip install flash-attn --no-build-isolation`
+2025-05-03 21:24:52,863 - S2SPipelineBridge - ERROR - 启动S2S管道失败: ParlerTTSHandler.setup() got an unexpected keyword argument 'description'
+2025-05-03 21:24:52,865 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 21:24:53,057 - S2SWebSocketServer - ERROR - 模型预加载失败
+2025-05-03 21:24:53,079 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 21:24:53,080 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 21:25:00,681 - websockets.server - INFO - connection open
+2025-05-03 21:25:00,682 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 64865)，当前连接数: 1
+2025-05-03 21:25:00,684 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 21:25:00,684 - S2SPipelineBridge - INFO - 更新配置: {'language': 'zh'}
+2025-05-03 21:25:00,685 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 21:25:00,685 - S2SPipelineBridge - INFO - 更新配置: {'stt_model': 'whisper-large-v3'}
+2025-05-03 21:25:00,685 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 21:25:00,686 - S2SPipelineBridge - INFO - 更新配置: {'lm_model': 'meta-llama/Llama-2-7b-chat-hf'}
+2025-05-03 21:25:00,686 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 21:25:00,686 - S2SPipelineBridge - INFO - 更新配置: {'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 21:25:08,240 - S2SWebSocketServer - INFO - 收到开始监听请求
+2025-05-03 21:25:08,240 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:25:09,824 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model openai/whisper-large-v3
+2025-05-03 21:30:33,115 - S2SPipelineBridge - INFO - 初始化S2SPipelineBridge
+2025-05-03 21:30:33,115 - S2SPipelineBridge - INFO - 初始化参数
+2025-05-03 21:30:33,115 - S2SPipelineBridge - INFO - 更新配置: {'language': 'en', 'stt_model': 'openai/whisper-large-v3', 'lm_model': 'meta-llama/Llama-2-7b-chat-hf', 'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 21:30:33,143 - websockets.server - INFO - server listening on 127.0.0.1:8766
+2025-05-03 21:30:33,143 - S2SWebSocketServer - INFO - WebSocket服务器已启动 - 监听 127.0.0.1:8766
+2025-05-03 21:30:37,984 - websockets.server - INFO - connection open
+2025-05-03 21:30:37,985 - S2SWebSocketServer - INFO - 客户端连接: ('127.0.0.1', 59376)，当前连接数: 1
+2025-05-03 21:30:37,986 - S2SWebSocketServer - INFO - 设置语言: zh
+2025-05-03 21:30:37,986 - S2SPipelineBridge - INFO - 更新配置: {'language': 'zh'}
+2025-05-03 21:30:37,986 - S2SWebSocketServer - INFO - 设置模型 stt: whisper-large-v3
+2025-05-03 21:30:37,986 - S2SPipelineBridge - INFO - 更新配置: {'stt_model': 'whisper-large-v3'}
+2025-05-03 21:30:37,986 - S2SWebSocketServer - INFO - 设置模型 llm: meta-llama/Llama-2-7b-chat-hf
+2025-05-03 21:30:37,986 - S2SPipelineBridge - INFO - 更新配置: {'lm_model': 'meta-llama/Llama-2-7b-chat-hf'}
+2025-05-03 21:30:37,986 - S2SWebSocketServer - INFO - 设置模型 tts: tts_models/multilingual/multi-dataset/xtts_v2
+2025-05-03 21:30:37,986 - S2SPipelineBridge - INFO - 更新配置: {'tts_model': 'tts_models/multilingual/multi-dataset/xtts_v2'}
+2025-05-03 21:30:49,533 - S2SWebSocketServer - INFO - 收到开始监听请求
+2025-05-03 21:30:49,538 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:30:55,667 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 21:30:59,539 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 21:38:57,017 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 21:39:01,813 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 21:39:18,486 - parler_tts.modeling_parler_tts - WARNING - Flash attention 2 is not installed
+2025-05-03 21:39:20,651 - TTS.parler_handler - WARNING - Parler TTS works best with flash attention 2, but is not installed
+        Given that CUDA is available in this system, you can install flash attention 2 with `uv pip install flash-attn --no-build-isolation`
+2025-05-03 21:39:20,886 - S2SPipelineBridge - ERROR - 启动S2S管道失败: parler-tts/parler-tts-mini is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2025-05-03 21:39:20,888 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 21:39:20,906 - S2SWebSocketServer - WARNING - 管道未运行，无法处理音频数据
+2025-05-03 21:39:20,907 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:39:22,713 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 21:39:25,809 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 21:49:22,234 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 21:49:29,628 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 21:49:29,628 - S2SPipelineBridge - ERROR - 启动S2S管道失败: 'min_new_tokens'
+2025-05-03 21:49:29,631 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 21:49:29,878 - S2SWebSocketServer - WARNING - 管道未运行，无法处理音频数据
+2025-05-03 21:49:29,883 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:49:31,541 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 21:49:35,567 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+2025-05-03 21:59:27,095 - LLM.language_model - INFO - Setting up LanguageModelHandler with model HuggingFaceTB/SmolLM-360M-Instruct
+2025-05-03 21:59:32,175 - LLM.language_model - INFO - Warming up LanguageModelHandler
+2025-05-03 21:59:32,176 - S2SPipelineBridge - ERROR - 启动S2S管道失败: 'min_new_tokens'
+2025-05-03 21:59:32,176 - S2SPipelineBridge - WARNING - S2S管道未运行
+2025-05-03 21:59:32,470 - S2SWebSocketServer - WARNING - 管道未运行，无法处理音频数据
+2025-05-03 21:59:32,470 - S2SPipelineBridge - INFO - 正在启动S2S管道...
+2025-05-03 21:59:34,226 - STT.whisper_stt_handler - INFO - Setting up WhisperSTTHandler with model distil-whisper/distil-large-v3
+2025-05-03 21:59:37,196 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler

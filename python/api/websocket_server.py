@@ -51,7 +51,7 @@ class S2SWebSocketServer:
     作为独立的服务运行，使得前端UI和后端处理系统可以完全分离。
     """
     
-    def __init__(self, host: str = "127.0.0.1", port: int = 8766, model_path: Optional[str] = None):
+    def __init__(self, host: str = "127.0.0.1", port: int = 8766, model_path: Optional[str] = None, preload_models: bool = True):
         self.host = host
         self.port = port
         self.clients = set()
@@ -61,6 +61,7 @@ class S2SWebSocketServer:
         self.text_output_queue = Queue()   # 存储要发送到前端的文本数据
         self.stop_event = threading.Event()
         self.model_path = model_path
+        self.preload_models = preload_models
         
         # 初始化管道配置
         self.pipeline_config = {
@@ -80,10 +81,39 @@ class S2SWebSocketServer:
         # 创建S2S管道桥接
         self.pipeline_bridge = S2SPipelineBridge()
         
+        # 更新管道配置
+        self.pipeline_bridge.update_config(self.pipeline_config)
+        
         # 创建结果监听线程
         self.result_listener_running = False
         self.result_listener_thread = None
         
+        # 如果设置了预加载，则在初始化时启动管道
+        if self.preload_models:
+            self.preload_pipeline()
+    
+    def preload_pipeline(self):
+        """预加载并预热所有模型"""
+        logger.info("正在预加载和预热模型，请稍候...")
+        start_time = time.time()
+        
+        # 启动管道（这将加载并预热所有模型）
+        success = self.pipeline_bridge.start_pipeline()
+        
+        if success:
+            elapsed_time = time.time() - start_time
+            logger.info(f"模型预加载完成，用时 {elapsed_time:.2f} 秒")
+            
+            # 启动结果监听线程
+            if not self.result_listener_running:
+                placeholder_websockets = []  # 空列表，因为还没有客户端连接
+                self.start_result_listener(placeholder_websockets)
+            
+            # 默认情况下关闭音频监听，直到客户端请求
+            self.pipeline_bridge.set_listening(False)
+        else:
+            logger.error("模型预加载失败")
+            
     async def register(self, websocket):
         """注册新的WebSocket客户端连接"""
         self.clients.add(websocket)
@@ -110,7 +140,17 @@ class S2SWebSocketServer:
         """处理单个客户端的WebSocket通信"""
         await self.register(websocket)
         try:
+            # 更新结果监听线程的websockets列表
+            if self.result_listener_running:
+                # 这里使用一个简单的方法来更新列表 - 停止当前线程并启动新线程
+                self.stop_result_listener()
+                self.start_result_listener(list(self.clients))
+            
             await self.send_status(websocket, "connected", {"config": self.pipeline_config})
+            
+            # 如果模型已经预加载，通知客户端
+            if self.pipeline_bridge.is_running():
+                await self.send_status(websocket, "pipeline_ready")
             
             async for message in websocket:
                 try:
@@ -151,6 +191,17 @@ class S2SWebSocketServer:
                                 self.pipeline_config["tts_model"] = model_name
                                 self.pipeline_bridge.update_config({"tts_model": model_name})
                             
+                            # 如果模型已加载，可能需要重启管道以应用新模型
+                            if self.pipeline_bridge.is_running():
+                                logger.info("模型已更改，正在重启管道...")
+                                self.pipeline_bridge.stop_pipeline()
+                                if self.pipeline_bridge.start_pipeline():
+                                    await self.send_status(websocket, "pipeline_restarted")
+                                else:
+                                    await self.send_status(websocket, "error", {
+                                        "message": "重启管道失败"
+                                    })
+                            
                             await self.send_status(websocket, "model_set", {
                                 "model_type": model_type,
                                 "model_name": model_name
@@ -167,7 +218,7 @@ class S2SWebSocketServer:
                                 
                                 # 启动结果监听线程
                                 if not self.result_listener_running:
-                                    self.start_result_listener([websocket])
+                                    self.start_result_listener(list(self.clients))
                             else:
                                 await self.send_status(websocket, "error", {
                                     "message": "启动管道失败"
@@ -206,6 +257,20 @@ class S2SWebSocketServer:
                                     })
                         else:
                             logger.warning("管道未运行，无法处理音频数据")
+                            await self.send_status(websocket, "warning", {
+                                "message": "管道未运行，正在启动..."
+                            })
+                            # 尝试启动管道
+                            if self.pipeline_bridge.start_pipeline():
+                                await self.send_status(websocket, "pipeline_started")
+                                # 处理音频数据
+                                audio_base64 = message_data.get("audio")
+                                if audio_base64:
+                                    try:
+                                        audio_data = base64.b64decode(audio_base64)
+                                        self.pipeline_bridge.send_audio(audio_data)
+                                    except Exception as e:
+                                        logger.error(f"处理音频数据失败: {str(e)}")
                     
                     elif message_type == "text_input":
                         # 处理文本输入（绕过STT直接发送到LLM）
@@ -221,7 +286,7 @@ class S2SWebSocketServer:
                                 
                                 # 启动结果监听线程
                                 if not self.result_listener_running:
-                                    self.start_result_listener([websocket])
+                                    self.start_result_listener(list(self.clients))
                                 
                                 # 发送文本
                                 text = message_data.get("text", "")
@@ -283,17 +348,22 @@ class S2SWebSocketServer:
             daemon=True
         )
         self.result_listener_thread.start()
+        logger.info("结果监听线程已启动")
     
     def stop_result_listener(self):
         """停止结果监听线程"""
+        if not self.result_listener_running:
+            return
+            
         self.result_listener_running = False
         if self.result_listener_thread:
             self.result_listener_thread.join(timeout=2.0)
             self.result_listener_thread = None
+        logger.info("结果监听线程已停止")
     
     def _result_listener_task(self, websockets_list):
         """结果监听线程的任务函数"""
-        logger.info("结果监听线程已启动")
+        logger.debug("结果监听线程已启动")
         
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
@@ -338,7 +408,7 @@ class S2SWebSocketServer:
                 logger.error(f"结果监听线程出错: {str(e)}")
                 time.sleep(1.0)  # 错误后暂停一段时间
         
-        logger.info("结果监听线程已停止")
+        logger.debug("结果监听线程已停止")
     
     def _send_to_all_clients(self, message, websockets_list, loop):
         """向所有WebSocket客户端发送消息"""
@@ -349,12 +419,12 @@ class S2SWebSocketServer:
                     loop
                 )
 
-async def main(host: str, port: int, model_path: Optional[str] = None):
+async def main(host: str, port: int, model_path: Optional[str] = None, preload_models: bool = True):
     """主函数，启动WebSocket服务器"""
     logger.debug("调试模式已启用")
     
     # 创建WebSocket服务器实例
-    server = S2SWebSocketServer(host=host, port=port, model_path=model_path)
+    server = S2SWebSocketServer(host=host, port=port, model_path=model_path, preload_models=preload_models)
     
     # 启动WebSocket服务器
     async with websockets.serve(server.handle_client, host, port):
@@ -367,11 +437,12 @@ if __name__ == "__main__":
     parser.add_argument("--host", type=str, default="127.0.0.1", help="WebSocket服务器主机地址")
     parser.add_argument("--port", type=int, default=8766, help="WebSocket服务器端口")
     parser.add_argument("--model_path", type=str, default=None, help="本地模型路径")
+    parser.add_argument("--no_preload", action="store_true", help="禁用模型预加载，改为按需加载")
     
     args = parser.parse_args()
     
     # 启动WebSocket服务器
     try:
-        asyncio.run(main(args.host, args.port, args.model_path))
+        asyncio.run(main(args.host, args.port, args.model_path, not args.no_preload))
     except KeyboardInterrupt:
         logger.info("服务器已手动停止") 

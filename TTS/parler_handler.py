@@ -19,13 +19,16 @@ torch._inductor.config.fx_graph_cache = True
 # mind about this parameter ! should be >= 2 * number of padded prompt sizes for TTS
 torch._dynamo.config.cache_size_limit = 15
 
+# 在模块顶部定义logger，但在各方法中使用局部日志对象
 logger = logging.getLogger(__name__)
 
 console = Console()
 
 
 if not is_flash_attn_2_available() and torch.cuda.is_available():
-    logger.warn(
+    # 使用局部日志对象
+    log = logging.getLogger(__name__)
+    log.warning(
         """Parler TTS works best with flash attention 2, but is not installed
         Given that CUDA is available in this system, you can install flash attention 2 with `uv pip install flash-attn --no-build-isolation`"""
     )
@@ -47,95 +50,82 @@ class ParlerTTSHandler(BaseHandler):
     def setup(
         self,
         should_listen,
-        model_name="parler-tts/parler-mini-v1-jenny",
         device="cuda",
         torch_dtype="float16",
         compile_mode=None,
-        gen_kwargs={},
+        speaker="Jason",
         max_prompt_pad_length=8,
-        description=(
-            "Jenny speaks at a slightly slow pace with an animated delivery with clear audio quality."
-        ),
-        play_steps_s=1,
-        blocksize=512,
-        use_default_speakers_list=True,
+        play_steps=10,
+        chunk_size=512,
+        stream=True,
+        gen_kwargs={},
+        **kwargs,  # 添加**kwargs以接收并忽略额外的参数，如description
     ):
+        # 使用局部日志对象
+        log = logging.getLogger(__name__)
+        
+        self.play_steps = play_steps
         self.should_listen = should_listen
         self.device = device
         self.torch_dtype = getattr(torch, torch_dtype)
-        self.gen_kwargs = gen_kwargs
         self.compile_mode = compile_mode
+        self.speaker = speaker
+        self.stream = stream
+        self.blocksize = chunk_size
         self.max_prompt_pad_length = max_prompt_pad_length
-        self.use_default_speakers_list = use_default_speakers_list
-        if self.use_default_speakers_list:
-            description = description.replace("Jenny", "")
 
-        self.speaker = "Jason"
-        self.description = description
+        self.tokenizer = AutoTokenizer.from_pretrained("parler-tts/parler-tts-mini")
+        self.prompt_tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
 
         self.model = ParlerTTSForConditionalGeneration.from_pretrained(
-            model_name, torch_dtype=self.torch_dtype
+            "parler-tts/parler-mini-v1-jenny",
+            torch_dtype=self.torch_dtype,
         ).to(device)
-        
-        self.description_tokenizer = AutoTokenizer.from_pretrained(self.model.config.text_encoder._name_or_path)
-        self.prompt_tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-
-        framerate = self.model.audio_encoder.config.frame_rate
-        self.play_steps = int(framerate * play_steps_s)
-        self.blocksize = blocksize
-
-        if self.compile_mode not in (None, "default"):
-            logger.warning(
-                "Torch compilation modes that captures CUDA graphs are not yet compatible with the TTS part. Reverting to 'default'"
-            )
-            self.compile_mode = "default"
-
+        # compile
         if self.compile_mode:
-            self.model.generation_config.cache_implementation = "static"
             self.model.forward = torch.compile(
                 self.model.forward, mode=self.compile_mode, fullgraph=True
             )
-
         self.warmup()
 
-    def prepare_model_inputs(
-        self,
-        prompt,
-        max_length_prompt=50,
-        pad=False,
-    ):
-        pad_args_prompt = (
-            {"padding": "max_length", "max_length": max_length_prompt} if pad else {}
+    def prepare_model_inputs(self, text, max_length_prompt=None, pad=False):
+        input_ids = self.tokenizer(
+            text,
+            return_tensors="pt",
+        ).input_ids.to(self.device)
+
+        prompt_ids = self.prompt_tokenizer(
+            text,
+            return_tensors="pt",
+        ).input_ids.to(self.device)
+        if pad and max_length_prompt is not None:
+            # TODO: pad to max_length_prompt
+            padded_prompt_ids = torch.zeros(
+                (1, max_length_prompt), dtype=torch.long, device=self.device
+            )
+            padded_prompt_ids[0, : prompt_ids.shape[1]] = prompt_ids
+            prompt_ids = padded_prompt_ids
+
+        # pad attention_mask
+        padded_attention_mask = torch.zeros(
+            (1, 1024), dtype=torch.long, device=self.device
         )
-
-        description = self.description
-        if self.use_default_speakers_list:
-            description = self.speaker + " " + self.description
-
-        tokenized_description = self.description_tokenizer(
-            description, return_tensors="pt"
-        ).to(self.device)
-        input_ids = tokenized_description.input_ids
-        attention_mask = tokenized_description.attention_mask
-
-        tokenized_prompt = self.prompt_tokenizer(
-            prompt, return_tensors="pt", **pad_args_prompt
-        ).to(self.device)
-        prompt_input_ids = tokenized_prompt.input_ids
-        prompt_attention_mask = tokenized_prompt.attention_mask
-
-        gen_kwargs = {
+        padded_attention_mask[0, : input_ids.shape[1]] = 1
+        
+        result_dict = {
             "input_ids": input_ids,
-            "attention_mask": attention_mask,
-            "prompt_input_ids": prompt_input_ids,
-            "prompt_attention_mask": prompt_attention_mask,
-            **self.gen_kwargs,
+            "prompt_ids": prompt_ids,
+            "attention_mask": padded_attention_mask,
+            "speaker": self.speaker
         }
-
-        return gen_kwargs
+        
+        return result_dict
 
     def warmup(self):
+        # 使用局部日志对象
+        log = logging.getLogger(__name__)
+        
         logger.info(f"Warming up {self.__class__.__name__}")
 
         if self.device == "cuda":
@@ -156,7 +146,7 @@ class ParlerTTSHandler(BaseHandler):
                 )
                 for _ in range(n_steps):
                     _ = self.model.generate(**model_kwargs)
-                logger.info(f"Warmed up length {pad_length} tokens!")
+                log.info(f"Warmed up length {pad_length} tokens!")
         else:
             model_kwargs = self.prepare_model_inputs("dummy prompt")
             for _ in range(n_steps):
@@ -165,11 +155,14 @@ class ParlerTTSHandler(BaseHandler):
         if self.device == "cuda":
             end_event.record()
             torch.cuda.synchronize()
-            logger.info(
+            log.info(
                 f"{self.__class__.__name__}:  warmed up! time: {start_event.elapsed_time(end_event) * 1e-3:.3f} s"
             )
 
     def process(self, llm_sentence):
+        # 使用局部日志对象
+        log = logging.getLogger(__name__)
+        
         if isinstance(llm_sentence, tuple):
             llm_sentence, language_code = llm_sentence
             self.speaker = WHISPER_LANGUAGE_TO_PARLER_SPEAKER.get(language_code, "Jason")
@@ -181,7 +174,7 @@ class ParlerTTSHandler(BaseHandler):
         if self.compile_mode:
             # pad to closest upper power of two
             pad_length = next_power_of_2(nb_tokens)
-            logger.debug(f"padding to {pad_length}")
+            log.debug(f"padding to {pad_length}")
             pad_args["pad"] = True
             pad_args["max_length_prompt"] = pad_length
 
@@ -201,7 +194,7 @@ class ParlerTTSHandler(BaseHandler):
         for i, audio_chunk in enumerate(streamer):
             global pipeline_start
             if i == 0 and "pipeline_start" in globals():
-                logger.info(
+                log.info(
                     f"Time to first audio: {perf_counter() - pipeline_start:.3f}"
                 )
             audio_chunk = librosa.resample(audio_chunk, orig_sr=44100, target_sr=16000)
