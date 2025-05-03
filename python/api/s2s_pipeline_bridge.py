@@ -114,6 +114,11 @@ class S2SPipelineBridge:
                     elif stt_model == "distil-large-v3":
                         stt_model = "distil-whisper/distil-large-v3"
                     self.whisper_stt_handler_kwargs.stt_model_name = stt_model
+                    
+                    # 解决forced_decoder_ids与task冲突问题
+                    # 移除默认的forced_decoder_ids设置，由模型自行处理
+                    if not hasattr(self.whisper_stt_handler_kwargs, "stt_gen_forced_decoder_ids"):
+                        setattr(self.whisper_stt_handler_kwargs, "stt_gen_forced_decoder_ids", None)
             elif "paraformer" in stt_model.lower():
                 self.module_kwargs.stt = "paraformer"
         

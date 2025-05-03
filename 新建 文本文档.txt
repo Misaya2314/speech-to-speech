@@ -1,0 +1,113 @@
+(speech) F:\STS\speech-to-speech>python s2s_pipeline.py --recv_host 127.0.0.1 --send_host 127.0.0.1
+F:\Anaconda\envs\speech\Lib\site-packages\df\io.py:9: UserWarning: `torchaudio.backend.common.AudioMetaData` has been moved to `torchaudio.AudioMetaData`. Please update the import path.
+  from torchaudio.backend.common import AudioMetaData
+[nltk_data] Downloading package averaged_perceptron_tagger_eng to
+[nltk_data]     C:\Users\misaya\AppData\Roaming\nltk_data...
+[nltk_data]   Package averaged_perceptron_tagger_eng is already up-to-
+[nltk_data]       date!
+Using cache found in C:\Users\misaya/.cache\torch\hub\snakers4_silero-vad_master
+2025-05-03 18:41:37,850 - STT.whisper_stt_handler - INFO - Warming up WhisperSTTHandler
+You have passed task=transcribe, but also have set `forced_decoder_ids` to [[1, None], [2, 50360]] which creates a conflict. `forced_decoder_ids` will be ignored in favor of task=transcribe.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+2025-05-03 18:41:40,305 - STT.whisper_stt_handler - INFO - WhisperSTTHandler:  warmed up! time: 2.336 s
+2025-05-03 18:41:45,561 - LLM.language_model - INFO - Warming up LanguageModelHandler
+F:\Anaconda\envs\speech\Lib\site-packages\transformers\generation\configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+2025-05-03 18:41:49,068 - LLM.language_model - INFO - LanguageModelHandler:  warmed up! time: 3.498 s
+2025-05-03 18:41:50,017 - parler_tts.modeling_parler_tts - WARNING - Flash attention 2 is not installed
+2025-05-03 18:41:51,210 - TTS.parler_handler - WARNING - Parler TTS works best with flash attention 2, but is not installed
+        Given that CUDA is available in this system, you can install flash attention 2 with `uv pip install flash-attn --no-build-isolation`
+F:\Anaconda\envs\speech\Lib\site-packages\torch\nn\utils\weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+2025-05-03 18:42:26,829 - parler_tts.modeling_parler_tts - WARNING - Config of the text_encoder: <class 'transformers.models.t5.modeling_t5.T5EncoderModel'> is overwritten by shared text_encoder config: T5Config {
+  "_name_or_path": "google/flan-t5-large",
+  "architectures": [
+    "T5ForConditionalGeneration"
+  ],
+  "classifier_dropout": 0.0,
+  "d_ff": 2816,
+  "d_kv": 64,
+  "d_model": 1024,
+  "decoder_start_token_id": 0,
+  "dense_act_fn": "gelu_new",
+  "dropout_rate": 0.1,
+  "eos_token_id": 1,
+  "feed_forward_proj": "gated-gelu",
+  "initializer_factor": 1.0,
+  "is_encoder_decoder": true,
+  "is_gated_act": true,
+  "layer_norm_epsilon": 1e-06,
+  "model_type": "t5",
+  "n_positions": 512,
+  "num_decoder_layers": 24,
+  "num_heads": 16,
+  "num_layers": 24,
+  "output_past": true,
+  "pad_token_id": 0,
+  "relative_attention_max_distance": 128,
+  "relative_attention_num_buckets": 32,
+  "tie_word_embeddings": false,
+  "transformers_version": "4.46.1",
+  "use_cache": true,
+  "vocab_size": 32128
+}
+
+2025-05-03 18:42:26,832 - parler_tts.modeling_parler_tts - WARNING - Config of the audio_encoder: <class 'parler_tts.dac_wrapper.modeling_dac.DACModel'> is overwritten by shared audio_encoder config: DACConfig {
+  "_name_or_path": "parler-tts/dac_44khZ_8kbps",
+  "architectures": [
+    "DACModel"
+  ],
+  "codebook_size": 1024,
+  "frame_rate": 86,
+  "latent_dim": 1024,
+  "model_bitrate": 8,
+  "model_type": "dac_on_the_hub",
+  "num_codebooks": 9,
+  "sampling_rate": 44100,
+  "torch_dtype": "float32",
+  "transformers_version": "4.46.1"
+}
+
+2025-05-03 18:42:26,833 - parler_tts.modeling_parler_tts - WARNING - Config of the decoder: <class 'parler_tts.modeling_parler_tts.ParlerTTSForCausalLM'> is overwritten by shared decoder config: ParlerTTSDecoderConfig {
+  "_name_or_path": "/fsx/yoach/tmp/artefacts/parler-tts-mini/decoder",
+  "activation_dropout": 0.0,
+  "activation_function": "gelu",
+  "add_cross_attention": true,
+  "architectures": [
+    "ParlerTTSForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 1025,
+  "codebook_weights": null,
+  "cross_attention_implementation_strategy": null,
+  "dropout": 0.1,
+  "eos_token_id": 1024,
+  "ffn_dim": 4096,
+  "hidden_size": 1024,
+  "initializer_factor": 0.02,
+  "is_decoder": true,
+  "layerdrop": 0.0,
+  "max_position_embeddings": 4096,
+  "model_type": "parler_tts_decoder",
+  "num_attention_heads": 16,
+  "num_codebooks": 9,
+  "num_cross_attention_key_value_heads": 16,
+  "num_hidden_layers": 24,
+  "num_key_value_heads": 16,
+  "pad_token_id": 1024,
+  "rope_embeddings": false,
+  "rope_theta": 10000.0,
+  "scale_embedding": false,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float32",
+  "transformers_version": "4.46.1",
+  "use_cache": true,
+  "use_fused_lm_heads": false,
+  "vocab_size": 1088
+}
+
+2025-05-03 18:42:50,802 - TTS.parler_handler - INFO - Warming up ParlerTTSHandler
+2025-05-03 18:42:51,539 - parler_tts.modeling_parler_tts - WARNING - `prompt_attention_mask` is specified but `attention_mask` is not. A full `attention_mask` will be created. Make sure this is the intended behaviour.
+2025-05-03 18:42:59,120 - TTS.parler_handler - INFO - ParlerTTSHandler:  warmed up! time: 8.292 s
+2025-05-03 18:42:59,468 - connections.socket_receiver - INFO - Receiver waiting to be connected...
+2025-05-03 18:42:59,468 - connections.socket_sender - INFO - Sender waiting to be connected...

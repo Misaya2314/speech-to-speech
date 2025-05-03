@@ -70,8 +70,14 @@ class WhisperSTTHandler(BaseHandler):
             spoken_prompt, sampling_rate=16000, return_tensors="pt"
         ).input_features
         input_features = input_features.to(self.device, dtype=self.torch_dtype)
+        
+        # 创建注意力掩码，防止pad token和eos token混淆
+        attention_mask = torch.ones(
+            input_features.shape[0], input_features.shape[2], 
+            dtype=torch.long, device=self.device
+        )
 
-        return input_features
+        return {"input_features": input_features, "attention_mask": attention_mask}
 
     def warmup(self):
         logger.info(f"Warming up {self.__class__.__name__}")
@@ -83,6 +89,10 @@ class WhisperSTTHandler(BaseHandler):
             dtype=self.torch_dtype,
             device=self.device,
         )
+        dummy_attention_mask = torch.ones(
+            1, 3000, dtype=torch.long, device=self.device
+        )
+        
         if self.compile_mode not in (None, "default"):
             # generating more tokens than previously will trigger CUDA graphs capture
             # one should warmup with a number of generated tokens above max tokens targeted for subsequent generation
@@ -104,7 +114,11 @@ class WhisperSTTHandler(BaseHandler):
             start_event.record()
 
         for _ in range(n_steps):
-            _ = self.model.generate(dummy_input, **warmup_gen_kwargs)
+            _ = self.model.generate(
+                input_features=dummy_input, 
+                attention_mask=dummy_attention_mask,
+                **warmup_gen_kwargs
+            )
 
         if self.device == "cuda":
             end_event.record()
@@ -120,8 +134,8 @@ class WhisperSTTHandler(BaseHandler):
         global pipeline_start
         pipeline_start = perf_counter()
 
-        input_features = self.prepare_model_inputs(spoken_prompt)
-        pred_ids = self.model.generate(input_features, **self.gen_kwargs)
+        model_inputs = self.prepare_model_inputs(spoken_prompt)
+        pred_ids = self.model.generate(**model_inputs, **self.gen_kwargs)
         language_code = self.processor.tokenizer.decode(pred_ids[0, 1])[2:-2]  # remove "<|" and "|>"
 
         if language_code not in SUPPORTED_LANGUAGES:  # reprocess with the last language
@@ -129,7 +143,7 @@ class WhisperSTTHandler(BaseHandler):
             gen_kwargs = copy(self.gen_kwargs)
             gen_kwargs['language'] = self.last_language
             language_code = self.last_language
-            pred_ids = self.model.generate(input_features, **gen_kwargs)
+            pred_ids = self.model.generate(**model_inputs, **gen_kwargs)
         else:
             self.last_language = language_code
         
